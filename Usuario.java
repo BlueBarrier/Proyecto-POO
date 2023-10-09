@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Usuario {
 
@@ -14,6 +13,7 @@ public class Usuario {
     private ArrayList<String> sintomas;
     private int diasSobrio;
     private Contador contador;
+    private Habito habito;
 
     public String getNombre() {
         return nombre;
@@ -71,28 +71,15 @@ public class Usuario {
         this.diasSobrio = diasSobrio;
     }
 
-    public Usuario(Scanner scanner) {
-        System.out.print("Nombre: ");
-        this.nombre = scanner.nextLine();
-        System.out.print("Correo: ");
-        this.correo = scanner.nextLine();
-        System.out.print("Edad: ");
-        this.edad = scanner.nextInt();
-        scanner.nextLine();
-        this.sexo = scanner.nextLine();
-        System.out.print("Ciudad: ");
-        this.ciudad = scanner.nextLine();
-        this.frecuenciaConsumo = new int[7];
-        for (int i = 0; i < 7; i++) {
-            System.out.print("Frecuencia de consumo para el día " + (i + 1) + ": ");
-            this.frecuenciaConsumo[i] = scanner.nextInt();
-        }
-        this.objetivos = new ArrayList<>();
-        this.reflexiones = new ArrayList<>();
-        this.sintomas = new ArrayList<>();
-        System.out.print("Días sobrio: ");
-        this.diasSobrio = scanner.nextInt();
-        scanner.nextLine();
-        this.contador = new Contador();
+    public Usuario(String nombre, int edad, String sexo, String ciudad, int[] frecuenciaConsumo, ArrayList<String> objetivos, int diasSobrio, Contador contador, Habito habito) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.ciudad = ciudad;
+        this.frecuenciaConsumo = frecuenciaConsumo;
+        this.objetivos = objetivos;
+        this.diasSobrio = diasSobrio;
+        this.contador = contador;
+        this.habito = habito;
     }
 }
