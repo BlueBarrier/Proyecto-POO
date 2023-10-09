@@ -1,5 +1,20 @@
-import java.util.ArrayList;
+/**
+ * Universidad del Valle de Guatemala
+ * Departamento de Ciencias de la Computación
+ * Programación Orientada a Objetos
+ * 
+ * Clase Habito: clase que almacena los hábitos del usuario, le asigna nuevos habitos
+ * y gradualmente va cambiando los malos hábitos del usuario por unos buenos.
+ * 
+ * @author: Luisa Jiménez - 23011, Erick Barrera - 231238
+ * @date: 08/10/2023
+ * @version: 1.0.1
+ * @lastUpdate: 08/10/2023
+ * Cambios realizados: corrección de errores
+ * 
+ */
 
+import java.util.ArrayList;
 public class Usuario {
 
     private String nombre;
