@@ -16,9 +16,21 @@
  */
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeFormatter;
+
 public class Contador {
     private Usuario usuario;
     private LocalDateTime diaInicio, diaActual;
 
+    public Contador(Usuario usuario, LocalDateTime diaInicio) {
+        this.usuario = usuario;
+        this.diaInicio = diaInicio;
+        this.diaActual = LocalDateTime.now();
+    }
+
+    public void mostrarDiasSobrio() {
+        long diasSobrio = ChronoUnit.DAYS.between(diaInicio, diaActual);
+        System.out.println("Días sobrios: " + diasSobrio);
+    }
 }
