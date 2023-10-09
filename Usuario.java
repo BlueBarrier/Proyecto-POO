@@ -3,8 +3,7 @@
  * Departamento de Ciencias de la Computación
  * Programación Orientada a Objetos
  * 
- * Clase Habito: clase que almacena los hábitos del usuario, le asigna nuevos habitos
- * y gradualmente va cambiando los malos hábitos del usuario por unos buenos.
+ * Clase Usuario: clase que almacena los datos de un usuario.
  * 
  * @author: Luisa Jiménez - 23011, Erick Barrera - 231238
  * @date: 08/10/2023
