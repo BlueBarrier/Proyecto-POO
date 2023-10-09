@@ -29,8 +29,34 @@ public class Contador {
         this.diaActual = LocalDateTime.now();
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario (Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public LocalDateTime getdiaInicio() {
+        return diaInicio;
+    }
+
+    public void setDiaInicio(LocalDateTime diaInicio) {
+        this.diaInicio = diaInicio;
+    }
+
+    public LocalDateTime getDiaActual() {
+        return diaActual;
+    }
+
+    public void setDiaActual(LocalDateTime diaActual) {
+        this.diaActual = diaActual;
+    }
+
     public void mostrarDiasSobrio() {
         long diasSobrio = ChronoUnit.DAYS.between(diaInicio, diaActual);
         System.out.println("Días sobrios: " + diasSobrio);
     }
+
+    
 }
