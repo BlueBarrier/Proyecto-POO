@@ -8,9 +8,9 @@
  * 
  * @author: Erick Barrera - 231238
  * @date: 08/10/2023
- * @version: 1.0.1
+ * @version: 1.0.2
  * @lastUpdate: 09/10/2023
- * Cambios realizados: finalización de funcionalidades y correción de atributos
+ * Cambios realizados: eliminación de atributo usuario
  * 
  * 
  */
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class Habito {
     private EntradaDatosTemp entrada = new EntradaDatosTemp(); // temporal 
-    private Usuario usuario;
     private ArrayList<String> habitosNuevos, habitosUsuario, habitosReemplazar;
     private ArrayList<String> palabrasClaveSaludables = new ArrayList<>(Arrays.asList(
             "ejercicio", "alimentación", "hidratación", "sueño", "meditación",
@@ -35,14 +34,12 @@ public class Habito {
     /**
      * @param habitosNuevos
      * @param habitosUsuario
-     * @param usuario
      * @param objetivosChunked
      * @param habitosReemplazar
      */
-    public Habito(ArrayList<String> habitosNuevos, ArrayList<String> habitosUsuario, Usuario usuario, ArrayList<String> objetivosChunked, ArrayList<String> habitosReemplazar){
+    public Habito(ArrayList<String> habitosNuevos, ArrayList<String> habitosUsuario, ArrayList<String> objetivosChunked, ArrayList<String> habitosReemplazar){
         this.habitosUsuario = habitosUsuario;
         this.habitosNuevos = habitosNuevos;
-        this.usuario = usuario;
         this.objetivosChunked = objetivosChunked;
         this.habitosReemplazar = habitosReemplazar;
         
@@ -74,18 +71,6 @@ public class Habito {
         this.habitosUsuario = habitosUsuario;
     }
 
-    /**
-     * @return usuario
-     */
-    public Usuario getUsuario() {
-        return usuario;
-    }
-    /**
-     * @param usuario
-     */
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
     public ArrayList<String> getHabitosReemplazar() {
         return habitosReemplazar;
     }
@@ -138,8 +123,8 @@ public class Habito {
     /**
      * función para crear habitos en relación a los objetivos del usuario
      */
-    public void chunkingObjetivos(){
-        for (String objetivo : usuario.getObjetivos()) {
+    public void chunkingObjetivos(ArrayList<String> objetivos){
+        for (String objetivo : objetivos) {
             System.out.println("\n Piensa en los recursos que necesitas para lograr este objetivo\n");
             System.out.printf("\nGenial!! ahora: ¿Cómo puedes dividir este objetivo (%s) en subobjetivos más específicos y realistas? ",objetivo );
             ArrayList<String> subObjetivos = entrada.pedirSubObjetivos(); // solicitud de data

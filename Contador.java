@@ -8,9 +8,9 @@
  * 
  * @author: María Ortiz - 23882, Erick Barrera - 231238
  * @date: 08/10/2023
- * @version: 1.0.0
+ * @version: 1.0.1
  * @lastUpdate: 08/10/2023
- * Cambios realizados: --
+ * Cambios realizados: corrección de errores
  * 
  * 
  */
@@ -20,21 +20,11 @@ import java.time.temporal.ChronoUnit;
 // import java.time.format.DateTimeFormatter;
 
 public class Contador {
-    private Usuario usuario;
     private LocalDateTime diaInicio, diaActual;
 
-    public Contador(Usuario usuario, LocalDateTime diaInicio) {
-        this.usuario = usuario;
+    public Contador(LocalDateTime diaInicio) {
         this.diaInicio = diaInicio;
         this.diaActual = LocalDateTime.now();
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario (Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public LocalDateTime getdiaInicio() {

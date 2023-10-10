@@ -7,9 +7,9 @@
  * 
  * @author: Luisa Jiménez - 23011, Erick Barrera - 231238
  * @date: 08/10/2023
- * @version: 1.0.2
+ * @version: 1.0.3
  * @lastUpdate: 09/10/2023
- * Cambios realizados: correción de errores y cambios a atributos
+ * Cambios realizados: eliminación atributo diasSobrio
  * 
  */
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class Usuario {
 
     private String nombre, correo, password, sexo, ciudad;
-    private int edad, diasSobrio;
+    private int edad;
     private int[] frecuenciaConsumo;
     private ArrayList<String> objetivos, reflexiones, sintomas;
     private HashMap<String, String> contactosEmergencia;
@@ -218,22 +218,6 @@ public class Usuario {
     }
 
     /**
-     * Obtiene el número de días sobrios del usuario.
-     * @return El número de días sobrios del usuario.
-     */
-    public int getDiasSobrio() {
-        return diasSobrio;
-    }
-
-    /**
-     * Establece el número de días sobrios del usuario.
-     * @param diasSobrio El nuevo número de días sobrios del usuario.
-     */
-    public void setDiasSobrio(int diasSobrio) {
-        this.diasSobrio = diasSobrio;
-    }
-
-    /**
      * Obtiene el contador de días sobrios del usuario.
      * @return El contador de días sobrios del usuario.
      */
@@ -261,13 +245,12 @@ public class Usuario {
      * @param contactosEmergencia
      * @param reflexiones
      * @param sintomas
-     * @param diasSobrio
      * @param contador
      * @param habitos
      */
     public Usuario(String nombre, String correo, String password, int edad, String sexo, String ciudad, int[] frecuenciaConsumo, 
     ArrayList<String> objetivos, HashMap<String, String> contactosEmergencia, ArrayList<String> reflexiones, ArrayList<String> sintomas,
-     int diasSobrio, Contador contador, Habito habitos) {
+    Contador contador, Habito habitos) {
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;
@@ -280,7 +263,6 @@ public class Usuario {
         this.contactosEmergencia = contactosEmergencia;
         this.reflexiones = reflexiones;
         this.sintomas = sintomas;
-        this.diasSobrio = diasSobrio;
         this.contador = contador;
     }
 }
