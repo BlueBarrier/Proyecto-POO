@@ -11,5 +11,6 @@ import javax.swing.JOptionPane;
 
 public class Informacion{
 
+    DefaultTableModel   model;
 
 }
