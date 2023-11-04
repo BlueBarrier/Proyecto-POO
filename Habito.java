@@ -110,6 +110,7 @@ public class Habito {
     public ArrayList<ArrayList<String>> analizarHabitos(){
         ArrayList<String> habitosSaludablesEncontrados = new ArrayList<>();
         ArrayList<String> habitosPerjudicialesEncontrados = new ArrayList<>();
+        // agregar lista temp de la base
         for (String  habito : habitosUsuario) {
             if (palabrasClaveSaludables.contains(habito)) {
                 habitosSaludablesEncontrados.add(habito);
