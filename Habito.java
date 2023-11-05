@@ -24,6 +24,8 @@ public class Habito {
     private EntradaDatosTemp entrada = new EntradaDatosTemp(); 
     private ArrayList<String> habitosNuevos, habitosUsuario, habitosReemplazar;
     private ArrayList<String> objetivosChunked;
+    ArrayList<String[]> palabrasClaveSaludables = new ArrayList<>();
+    ArrayList<String[]> palabrasClavePerjudiciales = new ArrayList<>();
     
     
     
@@ -39,24 +41,20 @@ public class Habito {
         this.objetivosChunked = objetivosChunked;
         this.habitosReemplazar = habitosReemplazar;
 
-        cargarBaseDeDatosHabitos();
-        
     }
 
     public void cargarBaseDeDatosHabitos() {
-        palabrasClaveSaludables = new ArrayList<>();
-        palabrasClavePerjudiciales = new ArrayList<>();
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:habitos.db");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:./db/habitosb.db");
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT nombre, descripcion FROM habitos");
 
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
-                palabrasClaveSaludables.add(nombre);
-                palabrasClaveSaludables.add(descripcion);
+                String[] habito = {nombre, descripcion};
+                palabrasClaveSaludables.add(habito);            
             }
 
             conn.close();
@@ -68,8 +66,8 @@ public class Habito {
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
-                palabrasClavePerjudiciales.add(nombre);
-                palabrasClavePerjudiciales.add(descripcion);
+                String[] HabitoM = {nombre, descripcion};
+                palabrasClavePerjudiciales.add(HabitoM);
             }
 
             conn.close();
@@ -117,12 +115,7 @@ public class Habito {
     public void setObjetivosChunked(ArrayList<String> objetivosChunked) {
         this.objetivosChunked = objetivosChunked;
     }
-    public ArrayList<String> getPalabrasClavePerjudiciales() {
-        return palabrasClavePerjudiciales;
-    }
-    public ArrayList<String> getPalabrasClaveSaludables() {
-        return palabrasClaveSaludables;
-    }
+
 
     // Funcionalidades
 
@@ -142,13 +135,22 @@ public class Habito {
      * @return lista de habitos buenos y malos del usuario
      */
     public ArrayList<ArrayList<String>> analizarHabitos(){
+        cargarBaseDeDatosHabitos();
+        ArrayList<String> habitosS = new ArrayList<>();
+        ArrayList<String> habitosM = new ArrayList<>();
+        for (String[] habit : palabrasClavePerjudiciales) {
+            habitosM.add(habit[0]);
+        }
+        for (String[] habit : palabrasClaveSaludables) {
+            habitosS.add(habit[0]);
+        }
         ArrayList<String> habitosSaludablesEncontrados = new ArrayList<>();
         ArrayList<String> habitosPerjudicialesEncontrados = new ArrayList<>();
         // agregar lista temp de la base
         for (String  habito : habitosUsuario) {
-            if (palabrasClaveSaludables.contains(habito)) {
+            if (habitosS.contains(habito)) {
                 habitosSaludablesEncontrados.add(habito);
-            } else if(palabrasClavePerjudiciales.contains(habito)){
+            } else if(habitosM.contains(habito)){
                 habitosPerjudicialesEncontrados.add(habito);
             }
         }

@@ -14,7 +14,6 @@
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 public class Usuario {
 
     private String nombre, correo, password, sexo, ciudad;
@@ -23,7 +22,7 @@ public class Usuario {
     private ArrayList<String> objetivos;
     private ArrayList<Reflexion> reflexiones;
     private ArrayList<Sintoma> sintomas;
-    private HashMap<String, String> contactosEmergencia;
+    private ArrayList<Contacto> contactosEmergencia;
     private Contador contador;
     private Habito habitos;
 
@@ -175,7 +174,7 @@ public class Usuario {
      * Obtiene los contactos de emergencia del usuario.
      * @return Los contactos de emergencia del usuario.
      */
-    public HashMap<String, String> getContactosEmergencia() {
+    public ArrayList<Contacto> getContactosEmergencia() {
         return contactosEmergencia;
     }
 
@@ -183,7 +182,7 @@ public class Usuario {
      * Establece los contactos de emergencia del usuario.
      * @param contactosEmergencia Los nuevos contactos de emergencia del usuario.
      */
-    public void setContactosEmergencia(HashMap<String, String> contactosEmergencia) {
+    public void setContactosEmergencia(ArrayList<Contacto> contactosEmergencia) {
         this.contactosEmergencia = contactosEmergencia;
     }
 
@@ -251,7 +250,7 @@ public class Usuario {
      * @param habitos
      */
     public Usuario(String nombre, String correo, String password, int edad, String sexo, String ciudad, int[] frecuenciaConsumo, 
-    ArrayList<String> objetivos, HashMap<String, String> contactosEmergencia, ArrayList<Reflexion> reflexiones, ArrayList<Sintoma> sintomas,
+    ArrayList<String> objetivos, ArrayList<Contacto> contactosEmergencia, ArrayList<Reflexion> reflexiones, ArrayList<Sintoma> sintomas,
     Contador contador, Habito habitos) {
         this.nombre = nombre;
         this.correo = correo;

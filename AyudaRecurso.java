@@ -21,6 +21,8 @@ public class AyudaRecurso {
     private ArrayList<Phrase> quotes = new ArrayList<>();
     private ArrayList<Contacto> contactos = new ArrayList<>();
     private ArrayList<Contacto> contactosUser = new ArrayList<>();
+    private ArrayList<Reflexion> reflexiones = new ArrayList<>();
+    private ArrayList<Sintoma> sintomas = new ArrayList<>();
     private static Connection connection = null;
     private static Connection connection2 = null;
     ResultSet result = null;
@@ -30,14 +32,11 @@ public class AyudaRecurso {
     
     public void leerData(String usuario){
         String url = "jdbc:sqlite:./db/ayuda.db";
-        String url2 = "jdbc:sqlite:./db/userInfo.db";
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(url);
-            connection2 = DriverManager.getConnection(url2);
             
             state = connection.createStatement();
-            state2 = connection2.createStatement();
 
             result = state.executeQuery("select * from Ejercicios");
             ejercicios.clear();
@@ -57,18 +56,7 @@ public class AyudaRecurso {
             while (result.next()) {
                 quotes.add(new Phrase(result.getInt(1), result.getString(2)));
             }
-
-            result2 = state2.executeQuery("select * from Contactos_Profesionales");
-            contactos.clear();
-            while (result2.next()) {
-                contactos.add(new Contacto(usuario, result2.getString(2),result2.getString(3),result2.getInt(4)));
-            }
-
-            result2 = state2.executeQuery("select * from Contactos_User where User = "+usuario);
-            contactosUser.clear();
-            while (result2.next()) {
-                contactosUser.add(new Contacto(usuario,result2.getString(2),result2.getString(3),result2.getInt(4)));
-            }
+  
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
@@ -99,7 +87,6 @@ public class AyudaRecurso {
                          "\nDuración: "+temp.getDuracion()+
                          "\nRepeticiones: "+temp.getRepeticiones());
     }
-
     public void mostrarConsejo(){
         Random rand = new Random();
         int indice = rand.nextInt(0,20);
@@ -115,8 +102,32 @@ public class AyudaRecurso {
         System.out.println("--Quote--");
         System.out.println(temp.getFrase());
     }
+    
+    public void loadContactos(String usuario){
+        String url2 = "jdbc:sqlite:./db/userInfo.db";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection2 = DriverManager.getConnection(url2);
+            state2 = connection2.createStatement();
 
-    public void mostrarContactos(){
+            result2 = state2.executeQuery("select * from Contactos_Profesionales");
+            contactos.clear();
+            while (result2.next()) {
+                contactos.add(new Contacto(usuario, result2.getString(2),result2.getString(3),result2.getInt(4)));
+            }
+    
+            result2 = state2.executeQuery("select * from Contactos_User where User = "+usuario);
+            contactosUser.clear();
+            while (result2.next()) {
+                contactosUser.add(new Contacto(usuario,result2.getString(2),result2.getString(3),result2.getInt(4)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void mostrarContactos(Usuario user){
+        loadContactos(user.getCorreo());
+        user.setContactosEmergencia(contactos);
         System.out.println("-Servicios Profesionales de Ayuda-");
         for (Contacto contact : contactos) {
             System.out.println("\nNombre: "+contact.getNombre()+
@@ -124,7 +135,7 @@ public class AyudaRecurso {
                                 "\n Número: "+contact.getNumero());
         }
         System.out.println("-Contactos de Ayuda Personales-");
-        for (Contacto contact2 : contactosUser) {
+        for (Contacto contact2 : user.getContactosEmergencia()) {
             System.out.println("\nNombre: "+contact2.getNombre()+
                                 "\t-"+contact2.getRelacion()+"-"+
                                 "\n Número: "+contact2.getNumero());
@@ -209,8 +220,30 @@ public class AyudaRecurso {
         }
     }
 
-    public void mostrarReflexiones(){
-        
+    public void loadReflexiones(String user){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+            Statement state = connR.createStatement();
+            ResultSet rest = state.executeQuery("select * from Reflexiones where User = "+user);
+            
+            reflexiones.clear();
+            while (rest.next()) {
+                reflexiones.add(new Reflexion(LocalDateTime.parse(rest.getString(2)),rest.getString(3),rest.getString(4)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrarReflexiones(Usuario user){
+        loadReflexiones(user.getCorreo());
+        user.setReflexiones(reflexiones);
+        for (Reflexion reflex : user.getReflexiones()) {
+            System.out.println("\nFecha: "+reflex.getFecha().toString()+
+                               "\nTítulo: "+reflex.getTitulo()+
+                               "\nReflexión: "+reflex.getEntrada());
+        }
     }
 
 }

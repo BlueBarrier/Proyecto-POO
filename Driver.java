@@ -9,8 +9,8 @@ public class Driver {
         Informacion info = new Informacion();
         info.leerData();
         Usuario user = new Usuario(entrada.nombre(), "Test","Test", 0, "Test", "Test", 
-        null, entrada.Objetivos(), entrada.contactorEmergencia(), new ArrayList<>(), new ArrayList<>(),
-         new Contador(entrada.fechaInicio()), new Habito(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        null, entrada.Objetivos(), null, null, null,
+         new Contador(entrada.fechaInicio()), null);
         do {
             switch (entrada.menu()) {
                 case 1:
