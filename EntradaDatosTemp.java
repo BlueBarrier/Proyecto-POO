@@ -68,7 +68,9 @@ public class EntradaDatosTemp {
                                 "\n2. crear hábitos"+
                                 "\n3. ver hábitos a realizar"+
                                 "\n4. ver hábitos a cambiar"+
-                                "\n5. salir");
+                                "\n5. Mostrar artículos"+
+                                "\n6. Mostrar videos"+
+                                "\n7. salir");
         try {
             int respuesta = scan.nextInt();
             scan.nextLine();

@@ -6,6 +6,8 @@ public class Driver {
         
         Scanner scan = new Scanner(System.in);
         EntradaDatosTemp entrada = new EntradaDatosTemp();
+        Informacion info = new Informacion();
+        info.leerData();
         Usuario user = new Usuario(entrada.nombre(), "Test","Test", 0, "Test", "Test", 
         null, entrada.Objetivos(), entrada.contactorEmergencia(), new ArrayList<>(), new ArrayList<>(),
          new Contador(entrada.fechaInicio()), new Habito(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
@@ -40,6 +42,12 @@ public class Driver {
                     }
                     break;
                 case 5:
+                    info.mostrarArticulo();
+                    break;
+                case 6:
+                    info.mostrarMultimedia();
+                    break;
+                case 7:
                     System.out.println("Saliendo...");
                     scan.close();
                     return;
