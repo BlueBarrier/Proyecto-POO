@@ -6,8 +6,8 @@ public class Informacion{
     private static Connection connection = null;
     private ArrayList<Multimedia> videos = new ArrayList<>();
     private ArrayList<Multimedia> articulos = new ArrayList<>();
-    ResultSet result;
-    int fila, col;
+    ResultSet result = null;
+    Statement state = null;
     
 
     public void leerData(){
@@ -16,7 +16,7 @@ public class Informacion{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(url);
             
-            Statement state = connection.createStatement();
+            state = connection.createStatement();
             result = state.executeQuery("select * from Videos");
 
             videos.clear();
@@ -33,6 +33,20 @@ public class Informacion{
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+        }finally{
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (state != null) {
+                    state.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

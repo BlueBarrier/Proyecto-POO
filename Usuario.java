@@ -20,7 +20,9 @@ public class Usuario {
     private String nombre, correo, password, sexo, ciudad;
     private int edad;
     private int[] frecuenciaConsumo;
-    private ArrayList<String> objetivos, reflexiones, sintomas;
+    private ArrayList<String> objetivos;
+    private ArrayList<Reflexion> reflexiones;
+    private ArrayList<Sintoma> sintomas;
     private HashMap<String, String> contactosEmergencia;
     private Contador contador;
     private Habito habitos;
@@ -189,7 +191,7 @@ public class Usuario {
      * Obtiene los síntomas registrados por el usuario.
      * @return Los síntomas registrados por el usuario.
      */
-    public ArrayList<String> getSintomas() {
+    public ArrayList<Sintoma> getSintomas() {
         return sintomas;
     }
 
@@ -197,7 +199,7 @@ public class Usuario {
      * Establece los síntomas registrados por el usuario.
      * @param sintomas Los nuevos síntomas registrados por el usuario.
      */
-    public void setSintomas(ArrayList<String> sintomas) {
+    public void setSintomas(ArrayList<Sintoma> sintomas) {
         this.sintomas = sintomas;
     }
 
@@ -205,7 +207,7 @@ public class Usuario {
      * Obtiene las reflexiones registradas por el usuario.
      * @return Las reflexiones registradas por el usuario.
      */
-    public ArrayList<String> getReflexiones() {
+    public ArrayList<Reflexion> getReflexiones() {
         return reflexiones;
     }
 
@@ -213,7 +215,7 @@ public class Usuario {
      * Establece las reflexiones registradas por el usuario.
      * @param reflexiones Las nuevas reflexiones registradas por el usuario.
      */
-    public void setReflexiones(ArrayList<String> reflexiones) {
+    public void setReflexiones(ArrayList<Reflexion> reflexiones) {
         this.reflexiones = reflexiones;
     }
 
@@ -249,7 +251,7 @@ public class Usuario {
      * @param habitos
      */
     public Usuario(String nombre, String correo, String password, int edad, String sexo, String ciudad, int[] frecuenciaConsumo, 
-    ArrayList<String> objetivos, HashMap<String, String> contactosEmergencia, ArrayList<String> reflexiones, ArrayList<String> sintomas,
+    ArrayList<String> objetivos, HashMap<String, String> contactosEmergencia, ArrayList<Reflexion> reflexiones, ArrayList<Sintoma> sintomas,
     Contador contador, Habito habitos) {
         this.nombre = nombre;
         this.correo = correo;

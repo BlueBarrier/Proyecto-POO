@@ -199,4 +199,94 @@ public class EntradaDatosTemp {
             return fecha;
         }
     }
+
+    public String pedirSintoma(){
+        System.out.println("Ingrese el sintoma que sufrió: ");
+        try {
+            String sintoma = scan.nextLine();
+            return sintoma;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSintoma();
+        }
+        return "";
+    }
+
+    public String pedirSDescripcion(){
+        System.out.println("Describa el sintoma que aconteció: ");
+        try {
+            String desc = scan.nextLine();
+            return desc;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSDescripcion();
+        }
+        return "";
+    }
+
+    public int pedirSGravedad(){
+        System.out.println("Ingrese la gravedad en una escala del 1 al 10:");
+        try {
+            int gravity = scan.nextInt();
+            scan.nextLine();
+            if (gravity>10 || gravity<0) {
+                System.out.println("Entre 1 - 10!");
+                pedirSGravedad();
+            }else{
+                return gravity;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSGravedad();
+        }
+        return 0;
+    }
+
+    public int pedirSDuracion(){
+        System.out.println("Ingrese la cantidad de minutos que duró: ");
+        try {
+            int duracion = scan.nextInt();
+            scan.nextLine();
+            if (duracion<0) {
+                System.out.println("No menos de 0");
+                pedirSDuracion();
+            }else{
+                return duracion;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSDuracion();
+        }
+        return 0;
+    }
+
+    public String pedirSAccion(){
+        System.out.println("Describa la acción que tomó:");
+        String accion = scan.nextLine();
+        return accion;
+    }
+
+    public String pedirRTitulo(){
+        System.out.println("Ingresa el título de tu reflexión: ");
+        try {
+            String name = scan.nextLine();
+            return name;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirRTitulo();
+        }
+        return "";
+    }
+
+    public String pedirREntrada(){
+        System.out.println("Ingresa tu reflexión:");
+        try {
+            String entrada = scan.nextLine();
+            return entrada;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirREntrada();
+        }
+        return "";
+    }
 }
