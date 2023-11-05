@@ -59,7 +59,7 @@ public class Habito {
 
             conn.close();
 
-            conn = DriverManager.getConnection("jdbc:sqlite:habitosm.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:./db/habitosm.db");
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT nombre, descripcion FROM habitosm");
 
