@@ -16,17 +16,13 @@
  */
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 public class Habito {
-    private EntradaDatosTemp entrada = new EntradaDatosTemp(); // temporal 
+    private EntradaDatosTemp entrada = new EntradaDatosTemp(); 
     private ArrayList<String> habitosNuevos, habitosUsuario, habitosReemplazar;
-    private ArrayList<String> palabrasClaveSaludables = new ArrayList<>(Arrays.asList(
-            "ejercicio", "alimentación", "hidratación", "sueño", "meditación",
-            "gratitud", "lectura", "aprender", "socialización", "familia"
-        ));
-    private ArrayList<String> palabrasClavePerjudiciales = new ArrayList<>(Arrays.asList(
-        "alcohol", "drogas", "tabaco", "comida chatarra", "sedentarismo",
-        "insomnio", "pantallas", "cafeína", "aislamiento", "rumiación", "CocaCola", "seguido", "En exceso"
-    ));
     private ArrayList<String> objetivosChunked;
     
     
@@ -42,8 +38,46 @@ public class Habito {
         this.habitosNuevos = habitosNuevos;
         this.objetivosChunked = objetivosChunked;
         this.habitosReemplazar = habitosReemplazar;
+
+        cargarBaseDeDatosHabitos();
         
     }
+
+    public void cargarBaseDeDatosHabitos() {
+        palabrasClaveSaludables = new ArrayList<>();
+        palabrasClavePerjudiciales = new ArrayList<>();
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:habitos.db");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT nombre, descripcion FROM habitos");
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                palabrasClaveSaludables.add(nombre);
+                palabrasClaveSaludables.add(descripcion);
+            }
+
+            conn.close();
+
+            conn = DriverManager.getConnection("jdbc:sqlite:habitosm.db");
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT nombre, descripcion FROM habitosm");
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                palabrasClavePerjudiciales.add(nombre);
+                palabrasClavePerjudiciales.add(descripcion);
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 // Getters y Setters
     /**
      * @return habitosNuevos
