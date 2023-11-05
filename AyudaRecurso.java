@@ -182,6 +182,35 @@ public class AyudaRecurso {
             System.out.println(e);
         }
     }
+    public void loadSintomas(String user){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(url);
+            Statement state = conn.createStatement();
+            ResultSet rest = state.executeQuery("select * from Sintomas where User = "+user);
+            
+            sintomas.clear();
+            while (rest.next()) {
+                sintomas.add(new Sintoma(user, rest.getString(2), 
+                LocalDateTime.parse(rest.getString(3)), rest.getString(4), 
+                rest.getInt(5), rest.getInt(6), rest.getString(7)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void mostrarSintomas(Usuario user){
+        loadSintomas(user.getCorreo());
+        user.setSintomas(sintomas);
+        for (Sintoma sint : user.getSintomas()) {
+            System.out.println("\nSintoma: "+sint.getSintoma()+
+                               "\nFecha: "+sint.getFecha().toString()+
+                               "\nDescripción: "+sint.getDescripcion()+
+                               "\nGravedad: "+sint.getGravedad()+
+                               "\nDuración: "+sint.getDuracion()+" min"+
+                               "\nAcción tomada: "+sint.getAccion());
+        }
+    }
 
 
     private String urlR = "jdbc:sqlite:./db/userInfo.db";
@@ -229,7 +258,8 @@ public class AyudaRecurso {
             
             reflexiones.clear();
             while (rest.next()) {
-                reflexiones.add(new Reflexion(LocalDateTime.parse(rest.getString(2)),rest.getString(3),rest.getString(4)));
+                reflexiones.add(new Reflexion(LocalDateTime.parse(rest.getString(2)),
+                rest.getString(3),rest.getString(4)));
             }
         } catch (Exception e) {
             e.printStackTrace();
