@@ -35,7 +35,8 @@ public class Habito {
      * @param objetivosChunked
      * @param habitosReemplazar
      */
-    public Habito(ArrayList<String> habitosNuevos, ArrayList<String> habitosUsuario, ArrayList<String> objetivosChunked, ArrayList<String> habitosReemplazar){
+    public Habito(ArrayList<String> habitosNuevos, ArrayList<String> habitosUsuario, 
+    ArrayList<String> objetivosChunked, ArrayList<String> habitosReemplazar){
         this.habitosUsuario = habitosUsuario;
         this.habitosNuevos = habitosNuevos;
         this.objetivosChunked = objetivosChunked;

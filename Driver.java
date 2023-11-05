@@ -8,9 +8,13 @@ public class Driver {
         EntradaDatosTemp entrada = new EntradaDatosTemp();
         Informacion info = new Informacion();
         info.leerData();
+
+        /* Crear inicio Crear Usuario o Ingresar con Usuario 
         Usuario user = new Usuario(entrada.nombre(), "Test","Test", 0, "Test", "Test", 
         null, entrada.Objetivos(), null, null, null,
          new Contador(entrada.fechaInicio()), null);
+        */
+
         do {
             switch (entrada.menu()) {
                 case 1:
