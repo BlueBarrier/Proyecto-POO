@@ -289,4 +289,47 @@ public class EntradaDatosTemp {
         }
         return "";
     }
+
+    public int logIn(){
+        System.out.println("--Programa Contra Adicciones--");
+        System.out.println("\n1. Iniciar Sesión"+
+                           "\n2. Crear Usuario");
+        try {
+            int op = scan.nextInt();
+            scan.nextLine();
+            return op;
+        } catch (Exception e) {
+            System.out.println("Ingrese una opción válida");
+            logIn();
+        }
+        return 0;
+    }
+
+    public String pedirCorreo(){
+        System.out.println("Ingrese su correo: ");
+        try {
+            String correo = scan.nextLine();
+            if (correo.contains("@")) {
+                return correo;
+            }
+            else{
+                System.out.println("Correo Invalido");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            pedirCorreo();
+        }
+        return "";
+    }
+    public String pedirPassword(){
+        System.out.println("Ingrese su contraseña: ");
+        try {
+            String pass = scan.nextLine();
+            return pass;
+        } catch (Exception e) {
+            e.printStackTrace();
+            pedirPassword();
+        }
+        return "";
+    }
 }
