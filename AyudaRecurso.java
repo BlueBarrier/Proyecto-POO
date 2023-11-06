@@ -145,13 +145,13 @@ public class AyudaRecurso {
     private static Connection conn = null;
     public void checkSintomas(){
         String query = "CREATE TABLE IF NOT EXISTS Sintomas ("+
-        " ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
-        " Sintoma TEXT NOT NULL"+
-        " Fecha TEXT NOT NULL"+
-        " Descripcion TEXT NOT NULL"+
-        " Gravedad INT NOT NULL"+
-        " Duracion INT NOT NULL"+
-        " Accion TEXT NOT NULL"+
+        " User TEXT NOT NULL,"+
+        " Sintoma TEXT NOT NULL,"+
+        " Fecha TEXT NOT NULL,"+
+        " Descripcion TEXT NOT NULL,"+
+        " Gravedad INT NOT NULL,"+
+        " Duracion INT NOT NULL,"+
+        " Accion TEXT NOT NULL,"+
         " FOREIGN KEY (User) REFERENCES Usuarios(correo)"+
         ");";
         try {
@@ -175,9 +175,11 @@ public class AyudaRecurso {
         String accion = entrada.pedirSAccion();
 
         try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into Sintomas('Sintoma','Fecha','Descripcion','Gravedad','Duracion','Accion',' User') VALUES ('"+
-            sintoma+"','"+fecha+"','"+descripcion+"','"+gravedad+"','"+duracion+"','"+accion+"','"+user+"')");
+            stmt.executeUpdate("insert into Sintomas('User','Sintoma','Fecha','Descripcion','Gravedad','Duracion','Accion') VALUES ('"+
+            user+"','"+sintoma+"','"+fecha+"','"+descripcion+"','"+gravedad+"','"+duracion+"','"+accion+"')");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -186,9 +188,12 @@ public class AyudaRecurso {
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(url);
-            Statement state = conn.createStatement();
-            ResultSet rest = state.executeQuery("select * from Sintomas where User = "+user);
-            
+
+            String selectQuery = "select * from Sintomas where User = ?";
+            PreparedStatement stmtPrep = connR.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user);
+            ResultSet rest = stmtPrep.executeQuery();
+
             sintomas.clear();
             while (rest.next()) {
                 sintomas.add(new Sintoma(user, rest.getString(2), 
@@ -217,10 +222,10 @@ public class AyudaRecurso {
     private static Connection connR = null;
     public void checkReflexion(){
         String query = "CREATE TABLE IF NOT EXISTS Reflexiones ("+
-        " ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
-        " Fecha TEXT NOT NULL"+
-        " Titulo TEXT NOT NULL"+
-        " Entrada TEXT NOT NULL"+
+        " User TEXT NOT NULL,"+
+        " Fecha TEXT NOT NULL,"+
+        " Titulo TEXT NOT NULL,"+
+        " Entrada TEXT NOT NULL,"+
         " FOREIGN KEY (User) REFERENCES Usuarios(correo)"+
         ");";
         try {
@@ -241,9 +246,11 @@ public class AyudaRecurso {
         String reflex = entrada.pedirREntrada();
 
         try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into Reflexiones('Fecha','Titulo','Entrada',' User') VALUES ('"+
-            fecha+"','"+titulo+"','"+reflex+"','"+user+"')");
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+            Statement stmt = connR.createStatement();
+            stmt.executeUpdate("insert into Reflexiones('User','Fecha','Titulo','Entrada') VALUES ('"+
+            user+"','"+fecha+"','"+titulo+"','"+reflex+"')");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -253,8 +260,11 @@ public class AyudaRecurso {
         try {
             Class.forName("org.sqlite.JDBC");
             connR = DriverManager.getConnection(urlR);
-            Statement state = connR.createStatement();
-            ResultSet rest = state.executeQuery("select * from Reflexiones where User = "+user);
+
+            String selectQuery = "select * from Reflexiones where User = ?";
+            PreparedStatement stmtPrep = connR.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user);
+            ResultSet rest = stmtPrep.executeQuery();
             
             reflexiones.clear();
             while (rest.next()) {
