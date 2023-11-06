@@ -1,3 +1,13 @@
+//************************************************************************
+//Universidad del Valle de Guatemala
+//Departamento de Ciencia de la Computación
+//Autor: Marielos Ortiz, Luisa Jiménez, Erick Barrera
+//Carné: 23882, 23011, 231238
+//CC2008 - 50
+//Fecha: Noviembre de 2023
+//Descripción: Proyecto Final
+//************************************************************************
+
 /**
  * La clase Multimedia representa un objeto multimedia con un identificador,
  * título y URL.

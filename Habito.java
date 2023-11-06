@@ -20,6 +20,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+/**
+ * La clase Habito representa una colección de datos relacionados con hábitos de salud y objetivos.
+ */
 public class Habito {
     private EntradaDatosTemp entrada = new EntradaDatosTemp(); 
     private ArrayList<String> habitosNuevos, habitosUsuario, habitosReemplazar;
@@ -44,6 +48,9 @@ public class Habito {
 
     }
 
+    /**
+     * Carga datos de hábitos saludables y perjudiciales desde bases de datos y los almacena en listas.
+     */
     public void cargarBaseDeDatosHabitos() {
 
         try {
@@ -77,7 +84,6 @@ public class Habito {
         }
     }
 
-// Getters y Setters
     /**
      * @return habitosNuevos
      */
@@ -104,15 +110,38 @@ public class Habito {
         this.habitosUsuario = habitosUsuario;
     }
 
+    /**
+     * Obtiene la lista de hábitos a reemplazar.
+     *
+     * @return La lista de hábitos a reemplazar.
+     */
     public ArrayList<String> getHabitosReemplazar() {
         return habitosReemplazar;
     }
+
+    /**
+     * Establece la lista de hábitos a reemplazar.
+     *
+     * @param habitosReemplazar La lista de hábitos a reemplazar que se va a establecer.
+     */
     public void setHabitosReemplazar(ArrayList<String> habitosReemplazar) {
         this.habitosReemplazar = habitosReemplazar;
     }
+
+    /**
+     * Obtiene la lista de objetivos fragmentados.
+     *
+     * @return La lista de objetivos fragmentados.
+     */
     public ArrayList<String> getObjetivosChunked() {
         return objetivosChunked;
     }
+
+    /**
+     * Establece la lista de objetivos fragmentados.
+     *
+     * @param objetivosChunked La lista de objetivos fragmentados que se va a establecer.
+     */
     public void setObjetivosChunked(ArrayList<String> objetivosChunked) {
         this.objetivosChunked = objetivosChunked;
     }

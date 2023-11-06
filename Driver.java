@@ -1,9 +1,12 @@
-
-/**
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Programación Orientada a Objetos
- */
+//************************************************************************
+//Universidad del Valle de Guatemala
+//Departamento de Ciencia de la Computación
+//Autor: Marielos Ortiz, Luisa Jiménez, Erick Barrera
+//Carné: 23882, 23011, 231238
+//CC2008 - 50
+//Fecha: Noviembre de 2023
+//Descripción: Proyecto Final
+//************************************************************************
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -73,8 +76,7 @@ public class Driver {
                         Class.forName("org.sqlite.JDBC");
                         conn = DriverManager.getConnection(url);
 
-                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (No
-                        // pude hacerlo, no me salió)
+                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (Está pendiente)
 
                         String insertQuery = "INSERT INTO User (nombre, correo, password, edad, genero, ciudad, frecuencia, fecha_inicio) "
                                 +
