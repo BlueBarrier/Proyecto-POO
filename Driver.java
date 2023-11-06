@@ -78,7 +78,7 @@ public class Driver {
                         Statement stmt = conn.createStatement();
                         
                         int rowsInserted = stmt.executeUpdate(
-                            "INSERT INTO User (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) VALUES('"+
+                            "INSERT INTO Usuarios (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) VALUES('"+
                             nombre+"','"+correoNuevo+"','"+passwordNuevo+"','"+edad+"','"+sexo+"','"+ciudad+"','"+freq+"','"+fechaNow+"')");
 
                         if (rowsInserted > 0) {
@@ -113,9 +113,11 @@ public class Driver {
                     user.getContador().mostrarDiasSobrio();
                     break;
                 case 2:
-                    user.getHabitos().setHabitosUsuario(entrada.habitosUsuario());
-                    user.getHabitos().chunkingObjetivos(user.getObjetivos());
-                    user.getHabitos().reemplazarHabitos();
+                System.out.println("REMODELANDO");
+                System.out.println("PRONTO SERÁ IMPLEMENTADO EN UNA DB");
+                    // user.getHabitos().setHabitosUsuario(entrada.habitosUsuario());
+                    // user.getHabitos().chunkingObjetivos(user.getObjetivos());
+                    // user.getHabitos().reemplazarHabitos();
 
                     break;
                 case 3:

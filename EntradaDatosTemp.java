@@ -421,11 +421,7 @@ public class EntradaDatosTemp {
         System.out.println("Ingrese su sexo (Masculino o Femenino): ");
         try {
             String sexo = scan.nextLine().trim();
-            if (!sexo.equals("Masculino") || !sexo.equals("Femenino")) {
-                System.out.println("Ingrese una de dos opciones tal y como aparece");
-                pedirSexo();
-            }else{
-            return sexo;}
+            return sexo;
         } catch (Exception e) {
             System.out.println(e);
             pedirSexo();
