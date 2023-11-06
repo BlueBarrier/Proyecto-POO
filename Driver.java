@@ -1,7 +1,5 @@
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 public class Driver {
 
@@ -28,7 +26,7 @@ public class Driver {
                         Class.forName("org.sqlite.JDBC");
                         conn = DriverManager.getConnection(url); 
                         Statement state = conn.createStatement();
-                        ResultSet rest = state.executeQuery("select * from User");
+                        ResultSet rest = state.executeQuery("select * from Usuarios");
 
                         while (rest.next()) {
                             String[] frecString = rest.getString(8).split(",");
@@ -48,34 +46,25 @@ public class Driver {
 
                     break;
                 case 2:
-                    String nombreNuevo = entrada.pedirNombre();
+                    String nombre = entrada.nombre();
                     String correoNuevo = entrada.pedirCorreo();
                     String passwordNuevo = entrada.pedirPassword();
 
-                    int edadNuevo = 0;
-                    String generoNuevo = null;
-                    String ciudadNueva = null;
+                    int edad = entrada.pedirEdad();
+                    String sexo = entrada.pedirSexo();
+                    String ciudad = entrada.pedirCiudad();
+                    String freq = entrada.pedirFreq();
+                    LocalDateTime fechaNow = LocalDateTime.now();
+
 
                     try {
                         Class.forName("org.sqlite.JDBC");
                         conn = DriverManager.getConnection(url); 
-
-                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (No pude hacerlo, no me salió)
-
-                        String insertQuery = "INSERT INTO User (nombre, correo, password, edad, genero, ciudad, frecuencia, fecha_inicio) " +
-                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-                        PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
-                        preparedStatement.setString(1, nombreNuevo);
-                        preparedStatement.setString(2, correoNuevo);
-                        preparedStatement.setString(3, passwordNuevo);
-                        preparedStatement.setInt(4, edadNuevo);
-                        preparedStatement.setString(5, generoNuevo);
-                        preparedStatement.setString(6, ciudadNueva);
-                        preparedStatement.setString(7, "0,0"); 
-                        preparedStatement.setString(8, LocalDateTime.now().toString()); 
-
-                        int rowsInserted = preparedStatement.executeUpdate();
+                        Statement stmt = conn.createStatement();
+                        
+                        int rowsInserted = stmt.executeUpdate(
+                            "INSERT INTO User (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) VALUES('"+
+                            nombre+"','"+correoNuevo+"','"+passwordNuevo+"','"+edad+"','"+sexo+"','"+ciudad+"','"+freq+"','"+fechaNow+"')");
 
                         if (rowsInserted > 0) {
                             System.out.println("Nuevo usuario creado con éxito.");

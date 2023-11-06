@@ -340,4 +340,83 @@ public class EntradaDatosTemp {
         }
         return "";
     }
+
+    public int pedirEdad(){
+        System.out.println("Ingrese su edad: ");
+        try {
+            int edad = scan.nextInt();
+            scan.nextLine();
+            if (edad>0) {
+                return edad;
+            }else{pedirEdad();}
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirEdad();
+        }
+        return 0;
+    }
+
+    public String pedirSexo(){
+        System.out.println("Ingrese su sexo (Masculino o Femenino): ");
+        try {
+            String sexo = scan.nextLine().trim();
+            if (!sexo.equals("Masculino") || !sexo.equals("Femenino")) {
+                System.out.println("Ingrese una de dos opciones tal y como aparece");
+                pedirSexo();
+            }else{
+            return sexo;}
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSexo();
+        }
+        return "";
+    }
+
+    public String pedirCiudad(){
+        System.out.println("Ingrese su ciudad: ");
+        try {
+            String city = scan.nextLine().trim();
+            return city;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirCiudad();
+        }
+        return "";
+    }
+
+    public String pedirFreq(){
+        System.out.println("Ingrese un intervalo de frecuencia de consumo (Ej.: 2,5): ");
+        System.out.println("\n Este se refiere a ingresar un día mínimo y uno máximo. Por ejemplo:");
+        System.out.println("Si consume CocaCola de dos a tres días a la semana, entonces ingrese: ");
+        System.out.println("2,3  De esta manera se podrá tener un registro de su consumo");
+        try {
+            String intervalo = scan.nextLine();
+
+            try {
+                String[] interv = intervalo.split(",");
+                try {
+                    int init = Integer.parseInt(interv[0]);
+                    try {
+                        int fin = Integer.parseInt(interv[1]);
+                        int[] frequ = {init, fin};
+                        System.out.println(frequ.toString());
+                        return intervalo;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        pedirFreq();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ingrese un número válido");
+                    pedirFreq();
+                }
+            } catch (Exception e) {
+                System.out.println("Separe los números con una coma");
+                pedirFreq();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            pedirFreq();
+        }
+        return "";
+    }
 }
