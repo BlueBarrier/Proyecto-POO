@@ -11,6 +11,8 @@ import java.util.Scanner;
 /**
  * La clase Driver es la clase principal del programa que interactúa con el
  * usuario y controla la lógica del programa.
+ * 
+ * Desde aqui se controla el programa
  */
 
 public class Driver {
