@@ -13,44 +13,87 @@ public class Driver {
         AyudaRecurso ayuda = new AyudaRecurso();
         info.leerData();
         ayuda.leerData();
-        
+
         boolean logIn = false;
+        Connection conn = null; 
+        String url = "jdbc:sqlite:./db/userInfo.db"; 
+
         do {
             switch (entrada.logIn()) {
                 case 1:
                     String correo = entrada.pedirCorreo();
                     String password = entrada.pedirPassword();
-                    
-                    String url = "jdbc:sqlite:./db/userInfo.db";
-                    Connection conn = null;
+
                     try {
                         Class.forName("org.sqlite.JDBC");
-                        conn = DriverManager.getConnection(url);
+                        conn = DriverManager.getConnection(url); 
                         Statement state = conn.createStatement();
                         ResultSet rest = state.executeQuery("select * from User");
 
                         while (rest.next()) {
-                            String[]frecString = new String[2];
-                            frecString = rest.getString(8).split(",");
+                            String[] frecString = rest.getString(8).split(",");
                             int[] frecuencia = new int[2];
                             frecuencia[0] = Integer.parseInt(frecString[0]);
                             frecuencia[1] = Integer.parseInt(frecString[1]);
                             if (rest.getString(3).equals(correo) && rest.getString(4).equals(password)) {
-                                user = new Usuario(rest.getString(2), correo, password,rest.getInt(5), rest.getString(6),
-                                 rest.getString(7),frecuencia, null, 
-                                 null, null, null, new Contador(LocalDateTime.parse(rest.getString(9))), null);
+                                user = new Usuario(rest.getString(2), correo, password, rest.getInt(5), rest.getString(6),
+                                        rest.getString(7), frecuencia, null,
+                                        null, null, null, new Contador(LocalDateTime.parse(rest.getString(9))), null);
                                 logIn = true;
-                            }                            
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-
                     break;
                 case 2:
-                     // HACER AQUI PARA CREAR UN NUEVO USARIO, DEJAR NULL LOS SIGUIENTES CAMPOS: 
-                     //objetivos, contactosEmergencia, reflexiones, sintomas, habitos
+                    String nombreNuevo = entrada.pedirNombre();
+                    String correoNuevo = entrada.pedirCorreo();
+                    String passwordNuevo = entrada.pedirPassword();
+
+                    int edadNuevo = 0;
+                    String generoNuevo = null;
+                    String ciudadNueva = null;
+
+                    try {
+                        Class.forName("org.sqlite.JDBC");
+                        conn = DriverManager.getConnection(url); 
+
+                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (No pude hacerlo, no me salió)
+
+                        String insertQuery = "INSERT INTO User (nombre, correo, password, edad, genero, ciudad, frecuencia, fecha_inicio) " +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
+                        preparedStatement.setString(1, nombreNuevo);
+                        preparedStatement.setString(2, correoNuevo);
+                        preparedStatement.setString(3, passwordNuevo);
+                        preparedStatement.setInt(4, edadNuevo);
+                        preparedStatement.setString(5, generoNuevo);
+                        preparedStatement.setString(6, ciudadNueva);
+                        preparedStatement.setString(7, "0,0"); 
+                        preparedStatement.setString(8, LocalDateTime.now().toString()); 
+
+                        int rowsInserted = preparedStatement.executeUpdate();
+
+                        if (rowsInserted > 0) {
+                            System.out.println("Nuevo usuario creado con éxito.");
+                        } else {
+                            System.out.println("No se pudo crear el usuario.");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            if (conn != null) {
+                                conn.close(); 
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     break;
                 case 3:
                     System.out.println("Salir");
