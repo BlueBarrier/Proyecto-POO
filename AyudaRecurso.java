@@ -242,7 +242,7 @@ public class AyudaRecurso {
 
         try {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into Sintomas('Fecha','Titulo','Entrada',' User') VALUES ('"+
+            stmt.executeUpdate("insert into Reflexiones('Fecha','Titulo','Entrada',' User') VALUES ('"+
             fecha+"','"+titulo+"','"+reflex+"','"+user+"')");
         } catch (Exception e) {
             System.out.println(e);
