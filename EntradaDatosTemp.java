@@ -70,7 +70,15 @@ public class EntradaDatosTemp {
                                 "\n4. ver hábitos a cambiar"+
                                 "\n5. Mostrar artículos"+
                                 "\n6. Mostrar videos"+
-                                "\n7. salir");
+                                "\n7. Mostrar Contactos"+
+                                "\n8. Mostrar un ejercicio"+
+                                "\n9. Mostrar un consejo"+
+                                "\n10. Mostrar una frase motivadora"+
+                                "\n11. Ingresar un sintoma"+
+                                "\n12. Crear una reflexión"+
+                                "\n13. Mostrar reflexiones"+
+                                "\n14. Mostrar sintomas"+
+                                "\n15. salir");
         try {
             int respuesta = scan.nextInt();
             scan.nextLine();

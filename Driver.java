@@ -10,8 +10,9 @@ public class Driver {
         Scanner scan = new Scanner(System.in);
         EntradaDatosTemp entrada = new EntradaDatosTemp();
         Informacion info = new Informacion();
+        AyudaRecurso ayuda = new AyudaRecurso();
         info.leerData();
-
+        ayuda.leerData();
         
         boolean logIn = false;
         do {
@@ -51,6 +52,9 @@ public class Driver {
                      // HACER AQUI PARA CREAR UN NUEVO USARIO, DEJAR NULL LOS SIGUIENTES CAMPOS: 
                      //objetivos, contactosEmergencia, reflexiones, sintomas, habitos
                     break;
+                case 3:
+                    System.out.println("Salir");
+                    return;
                 default:
                     System.out.println("Ingrese una opción válida");
                     break;
@@ -93,11 +97,51 @@ public class Driver {
                     info.mostrarMultimedia();
                     break;
                 case 7:
+                    ayuda.mostrarContactos(user);
+                    break;
+                case 8:
+                    ayuda.mostrarEjercicio();
+                    break;
+                case 9:
+                    ayuda.mostrarConsejo();
+                    break;
+                case 10:
+                    ayuda.mostrarQuote();
+                    break;
+                case 11:
+                    ayuda.mostrarQuote();
+                    ayuda.addSintoma(user.getCorreo());
+                    break;
+                case 12:
+                    System.out.println("\n¡¡Expresate!!\n");
+                    ayuda.addReflexion(user.getCorreo());
+                    break;
+                case 13:
+                    try {
+                        ayuda.mostrarReflexiones(user);
+                    } catch (Exception e) {
+                        System.out.println("Ingrese primero una reflexión");
+                        e.printStackTrace();
+                    }
+                    break;
+                case 14:
+                    try {
+                        ayuda.mostrarSintomas(user);
+                        if (user.getSintomas().size() > 3) {
+                            System.out.println("Estas pasando por un momento complicado, realiza un ejercicio");
+                            ayuda.mostrarEjercicio();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Ingrese un sintoma primero");
+                        e.printStackTrace();
+                    }
+                    break;
+                case 15:
                     System.out.println("Saliendo...");
                     scan.close();
                     return;
                 default:
-                    System.out.println("Ingrese una opción entre 1 y 5");
+                    System.out.println("Ingrese una opción entre 1 y 15");
                     break;
             }
         } while (true);

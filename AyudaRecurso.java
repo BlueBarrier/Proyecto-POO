@@ -30,7 +30,7 @@ public class AyudaRecurso {
     ResultSet result2 = null;
     Statement state2 = null;
     
-    public void leerData(String usuario){
+    public void leerData(){
         String url = "jdbc:sqlite:./db/ayuda.db";
         try {
             Class.forName("org.sqlite.JDBC");
@@ -164,7 +164,7 @@ public class AyudaRecurso {
         }
     }
 
-    public void addSintomas(String user) throws SQLException{
+    public void addSintoma(String user){
         checkSintomas();
         String sintoma = entrada.pedirSintoma();
         LocalDateTime fechaDateTime = LocalDateTime.now();
