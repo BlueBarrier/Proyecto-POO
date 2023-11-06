@@ -1,22 +1,41 @@
+
+/**
+ * Universidad del Valle de Guatemala
+ * Departamento de Ciencias de la Computación
+ * Programación Orientada a Objetos
+ */
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+
+/**
+ * La clase EntradaDatosTemp proporciona métodos para interactuar con el usuario
+ * y recopilar información.
+ */
+
 public class EntradaDatosTemp {
     Scanner scan = new Scanner(System.in);
 
-    public ArrayList<String> pedirSubObjetivos(){
+    /**
+     * Pide al usuario una lista de subobjetivos y la devuelve en forma de ArrayList
+     * de cadenas.
+     *
+     * @return Una lista de subobjetivos ingresados por el usuario.
+     */
+
+    public ArrayList<String> pedirSubObjetivos() {
         boolean salir = false;
         ArrayList<String> subObjetivos = new ArrayList<>();
         while (!salir) {
             System.out.println("Ingrese el subobjetivo: ");
             String objetivoTemp = scan.nextLine();
             subObjetivos.add(objetivoTemp.trim().toLowerCase());
-            System.out.println("\n ¿Desea agregar otro?"+
-                                        "\n1.Si"+
-                                        "\n2.No");
+            System.out.println("\n ¿Desea agregar otro?" +
+                    "\n1.Si" +
+                    "\n2.No");
             try {
                 int respuesta = scan.nextInt();
                 scan.nextLine();
@@ -34,16 +53,23 @@ public class EntradaDatosTemp {
         }
         return subObjetivos;
     }
-    public ArrayList<String> pedirAcciones(){
+
+    /**
+     * Pide al usuario una lista de acciones y la devuelve en forma de ArrayList de
+     * cadenas.
+     *
+     * @return Una lista de acciones ingresadas por el usuario.
+     */
+    public ArrayList<String> pedirAcciones() {
         boolean salir = false;
         ArrayList<String> acciones = new ArrayList<>();
         while (!salir) {
             System.out.println("Ingrese la acción concreta, que sea un verbo de preferencia: ");
             String accion = scan.nextLine();
             acciones.add(accion.trim().toLowerCase());
-            System.out.println("\n ¿Desea agregar otro?"+
-                                        "\n1.Si"+
-                                        "\n2.No");
+            System.out.println("\n ¿Desea agregar otro?" +
+                    "\n1.Si" +
+                    "\n2.No");
             try {
                 int respuesta = scan.nextInt();
                 scan.nextLine();
@@ -62,51 +88,69 @@ public class EntradaDatosTemp {
         return acciones;
     }
 
-    public int menu(){
-        System.out.println("---Menu----"+
-                                "\n1. ver días sobrio"+
-                                "\n2. crear hábitos"+
-                                "\n3. ver hábitos a realizar"+
-                                "\n4. ver hábitos a cambiar"+
-                                "\n5. Mostrar artículos"+
-                                "\n6. Mostrar videos"+
-                                "\n7. Mostrar Contactos"+
-                                "\n8. Mostrar un ejercicio"+
-                                "\n9. Mostrar un consejo"+
-                                "\n10. Mostrar una frase motivadora"+
-                                "\n11. Ingresar un sintoma"+
-                                "\n12. Crear una reflexión"+
-                                "\n13. Mostrar reflexiones"+
-                                "\n14. Mostrar sintomas"+
-                                "\n15. salir");
+    /**
+     * Muestra un menú de opciones al usuario y devuelve la opción seleccionada.
+     *
+     * @return La opción seleccionada por el usuario.
+     */
+
+    public int menu() {
+        System.out.println("---Menu----" +
+                "\n1. ver días sobrio" +
+                "\n2. crear hábitos" +
+                "\n3. ver hábitos a realizar" +
+                "\n4. ver hábitos a cambiar" +
+                "\n5. Mostrar artículos" +
+                "\n6. Mostrar videos" +
+                "\n7. Mostrar Contactos" +
+                "\n8. Mostrar un ejercicio" +
+                "\n9. Mostrar un consejo" +
+                "\n10. Mostrar una frase motivadora" +
+                "\n11. Ingresar un sintoma" +
+                "\n12. Crear una reflexión" +
+                "\n13. Mostrar reflexiones" +
+                "\n14. Mostrar sintomas" +
+                "\n15. salir");
         try {
             int respuesta = scan.nextInt();
             scan.nextLine();
             return respuesta;
         } catch (Exception e) {
-            System.out.println("Ingrese un valor válido: "+e.getMessage());
+            System.out.println("Ingrese un valor válido: " + e.getMessage());
             int respuesta = scan.nextInt();
             scan.nextLine();
             return respuesta;
         }
     }
 
-    public String nombre(){
+    /**
+     * Pide al usuario su nombre y lo devuelve como una cadena.
+     *
+     * @return El nombre ingresado por el usuario.
+     */
+    public String nombre() {
         System.out.println("Ingrese su nombre: ");
         String nombre = scan.nextLine();
         return nombre;
     }
 
-    public ArrayList<String> Objetivos(){
+    /**
+     * Pide al usuario una lista de objetivos y la devuelve en forma de ArrayList de
+     * cadenas.
+     *
+     * @return Una lista de objetivos ingresados por el usuario.
+     */
+
+    public ArrayList<String> Objetivos() {
         boolean salir = false;
         ArrayList<String> objetivos = new ArrayList<>();
         while (!salir) {
             System.out.println("Ingrese un objetivo que quiera cumplir: ");
             String objetivo = scan.nextLine();
             objetivos.add(objetivo.trim().toLowerCase());
-            System.out.println("\n ¿Desea agregar otro?"+
-                                        "\n1.Si"+
-                                        "\n2.No");
+            System.out.println("\n ¿Desea agregar otro?" +
+                    "\n1.Si" +
+                    "\n2.No");
             try {
                 int respuesta = scan.nextInt();
                 scan.nextLine();
@@ -125,18 +169,25 @@ public class EntradaDatosTemp {
         return objetivos;
     }
 
-    public HashMap<String, String> contactorEmergencia(){
+    /**
+     * Pide al usuario una lista de contactos de emergencia y los devuelve como un
+     * HashMap de nombre y número de teléfono.
+     *
+     * @return Un HashMap que contiene los contactos de emergencia ingresados por el
+     *         usuario.
+     */
+    public HashMap<String, String> contactorEmergencia() {
         boolean salir = false;
-        HashMap<String,String> contactos = new HashMap<>();
+        HashMap<String, String> contactos = new HashMap<>();
         while (!salir) {
             System.out.println("Ingrese el nombre del contacto: ");
             String contacto = scan.nextLine();
             System.out.println("Ingrese el número del contacto (Ej.: 4587-9865): ");
             String numero = scan.nextLine();
             contactos.put(contacto, numero);
-            System.out.println("\n ¿Desea agregar otro?"+
-                                        "\n1.Si"+
-                                        "\n2.No");
+            System.out.println("\n ¿Desea agregar otro?" +
+                    "\n1.Si" +
+                    "\n2.No");
             try {
                 int respuesta = scan.nextInt();
                 scan.nextLine();
@@ -155,7 +206,7 @@ public class EntradaDatosTemp {
         return contactos;
     }
 
-    public ArrayList<String> habitosUsuario(){
+    public ArrayList<String> habitosUsuario() {
         boolean salir = false;
         ArrayList<String> habitosSeleccionados = new ArrayList<>();
         ArrayList<String> todosLosHabitos = new ArrayList<>(Arrays.asList(
@@ -163,8 +214,7 @@ public class EntradaDatosTemp {
                 "gratitud", "lectura", "aprender", "socialización", "familia",
                 "alcohol", "drogas", "tabaco", "comida chatarra", "sedentarismo",
                 "insomnio", "pantallas", "cafeína", "aislamiento", "rumiación",
-                "CocaCola", "seguido", "En exceso"
-        ));
+                "CocaCola", "seguido", "En exceso"));
         while (!salir) {
             System.out.println("Lista de hábitos disponibles:");
             for (int i = 0; i < todosLosHabitos.size(); i++) {
@@ -175,7 +225,7 @@ public class EntradaDatosTemp {
             int opcion = scan.nextInt();
 
             if (opcion == 0) {
-                salir = true; 
+                salir = true;
             } else if (opcion > 0 && opcion <= todosLosHabitos.size()) {
                 String habitoElegido = todosLosHabitos.get(opcion - 1);
 
@@ -192,6 +242,12 @@ public class EntradaDatosTemp {
         return habitosSeleccionados;
     }
 
+    /**
+     * Pide al usuario una fecha y hora en formato "yyyy-MM-dd HH:mm:ss" y la
+     * devuelve como LocalDateTime.
+     *
+     * @return La fecha y hora ingresada por el usuario como LocalDateTime.
+     */
 
     public LocalDateTime fechaInicio() {
         System.out.print("Ingrese una fecha en formato 'yyyy-MM-dd HH:mm:ss': ");
@@ -208,7 +264,7 @@ public class EntradaDatosTemp {
         }
     }
 
-    public String pedirSintoma(){
+    public String pedirSintoma() {
         System.out.println("Ingrese el sintoma que sufrió: ");
         try {
             String sintoma = scan.nextLine();
@@ -220,7 +276,7 @@ public class EntradaDatosTemp {
         return "";
     }
 
-    public String pedirSDescripcion(){
+    public String pedirSDescripcion() {
         System.out.println("Describa el sintoma que aconteció: ");
         try {
             String desc = scan.nextLine();
@@ -232,15 +288,15 @@ public class EntradaDatosTemp {
         return "";
     }
 
-    public int pedirSGravedad(){
+    public int pedirSGravedad() {
         System.out.println("Ingrese la gravedad en una escala del 1 al 10:");
         try {
             int gravity = scan.nextInt();
             scan.nextLine();
-            if (gravity>10 || gravity<0) {
+            if (gravity > 10 || gravity < 0) {
                 System.out.println("Entre 1 - 10!");
                 pedirSGravedad();
-            }else{
+            } else {
                 return gravity;
             }
         } catch (Exception e) {
@@ -250,15 +306,15 @@ public class EntradaDatosTemp {
         return 0;
     }
 
-    public int pedirSDuracion(){
+    public int pedirSDuracion() {
         System.out.println("Ingrese la cantidad de minutos que duró: ");
         try {
             int duracion = scan.nextInt();
             scan.nextLine();
-            if (duracion<0) {
+            if (duracion < 0) {
                 System.out.println("No menos de 0");
                 pedirSDuracion();
-            }else{
+            } else {
                 return duracion;
             }
         } catch (Exception e) {
@@ -268,13 +324,13 @@ public class EntradaDatosTemp {
         return 0;
     }
 
-    public String pedirSAccion(){
+    public String pedirSAccion() {
         System.out.println("Describa la acción que tomó:");
         String accion = scan.nextLine();
         return accion;
     }
 
-    public String pedirRTitulo(){
+    public String pedirRTitulo() {
         System.out.println("Ingresa el título de tu reflexión: ");
         try {
             String name = scan.nextLine();
@@ -286,7 +342,7 @@ public class EntradaDatosTemp {
         return "";
     }
 
-    public String pedirREntrada(){
+    public String pedirREntrada() {
         System.out.println("Ingresa tu reflexión:");
         try {
             String entrada = scan.nextLine();
@@ -298,10 +354,10 @@ public class EntradaDatosTemp {
         return "";
     }
 
-    public int logIn(){
+    public int logIn() {
         System.out.println("--Programa Contra Adicciones--");
-        System.out.println("\n1. Iniciar Sesión"+
-                           "\n2. Crear Usuario");
+        System.out.println("\n1. Iniciar Sesión" +
+                "\n2. Crear Usuario");
         try {
             int op = scan.nextInt();
             scan.nextLine();
@@ -313,14 +369,18 @@ public class EntradaDatosTemp {
         return 0;
     }
 
-    public String pedirCorreo(){
+    /**
+     * Pide al usuario un correo electrónico y lo devuelve como una cadena.
+     *
+     * @return El correo electrónico ingresado por el usuario.
+     */
+    public String pedirCorreo() {
         System.out.println("Ingrese su correo: ");
         try {
             String correo = scan.nextLine();
             if (correo.contains("@")) {
                 return correo;
-            }
-            else{
+            } else {
                 System.out.println("Correo Invalido");
             }
         } catch (Exception e) {
@@ -329,7 +389,8 @@ public class EntradaDatosTemp {
         }
         return "";
     }
-    public String pedirPassword(){
+
+    public String pedirPassword() {
         System.out.println("Ingrese su contraseña: ");
         try {
             String pass = scan.nextLine();
