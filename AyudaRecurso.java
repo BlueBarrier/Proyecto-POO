@@ -145,7 +145,7 @@ public class AyudaRecurso {
     private static Connection conn = null;
     public void checkSintomas(){
         String query = "CREATE TABLE IF NOT EXISTS Sintomas ("+
-        " ID INT PRIMARY KEY AUTOINCREMENT,"+
+        " ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
         " Sintoma TEXT NOT NULL"+
         " Fecha TEXT NOT NULL"+
         " Descripcion TEXT NOT NULL"+
@@ -217,7 +217,7 @@ public class AyudaRecurso {
     private static Connection connR = null;
     public void checkReflexion(){
         String query = "CREATE TABLE IF NOT EXISTS Reflexiones ("+
-        " ID INT PRIMARY KEY AUTOINCREMENT,"+
+        " ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
         " Fecha TEXT NOT NULL"+
         " Titulo TEXT NOT NULL"+
         " Entrada TEXT NOT NULL"+
