@@ -264,6 +264,9 @@ public class EntradaDatosTemp {
         }
     }
 
+    /**
+     * @return String del sintoma que se sufre
+     */
     public String pedirSintoma() {
         System.out.println("Ingrese el sintoma que sufrió: ");
         try {
@@ -276,6 +279,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return String de lo ocurrido con el sintoma
+     */
     public String pedirSDescripcion() {
         System.out.println("Describa el sintoma que aconteció: ");
         try {
@@ -288,6 +294,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return una escala de la gravedad del sintoma
+     */
     public int pedirSGravedad() {
         System.out.println("Ingrese la gravedad en una escala del 1 al 10:");
         try {
@@ -306,6 +315,9 @@ public class EntradaDatosTemp {
         return 0;
     }
 
+    /**
+     * @return la cantidad que duro el sintoma
+     */
     public int pedirSDuracion() {
         System.out.println("Ingrese la cantidad de minutos que duró: ");
         try {
@@ -324,12 +336,18 @@ public class EntradaDatosTemp {
         return 0;
     }
 
+    /** 
+     * @return pide la accion que realizó el usuario luego del sintoma, como tomar una pastilla o beber
+     */
     public String pedirSAccion() {
         System.out.println("Describa la acción que tomó:");
         String accion = scan.nextLine();
         return accion;
     }
 
+    /**
+     * @return pide el título de la reflexión
+     */
     public String pedirRTitulo() {
         System.out.println("Ingresa el título de tu reflexión: ");
         try {
@@ -342,6 +360,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return pide que ingrese la reflexión
+     */
     public String pedirREntrada() {
         System.out.println("Ingresa tu reflexión:");
         try {
@@ -354,6 +375,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return menu para el inició del programa
+     */
     public int logIn() {
         System.out.println("--Programa Contra Adicciones--");
         System.out.println("\n1. Iniciar Sesión" +
@@ -390,6 +414,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return pide la contraseña
+     */
     public String pedirPassword() {
         System.out.println("Ingrese su contraseña: ");
         try {
@@ -402,6 +429,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return pide la edad
+     */
     public int pedirEdad(){
         System.out.println("Ingrese su edad: ");
         try {
@@ -417,6 +447,9 @@ public class EntradaDatosTemp {
         return 0;
     }
 
+    /**
+     * @return pide el sexo
+     */
     public String pedirSexo(){
         System.out.println("Ingrese su sexo (Masculino o Femenino): ");
         try {
@@ -429,6 +462,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return pide la ciudad
+     */
     public String pedirCiudad(){
         System.out.println("Ingrese su ciudad: ");
         try {
@@ -441,6 +477,9 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * @return pide el intervalo de frecuencia de consumo
+     */
     public String pedirFreq(){
         System.out.println("Ingrese un intervalo de frecuencia de consumo (Ej.: 2,5): ");
         System.out.println("\n Este se refiere a ingresar un día mínimo y uno máximo. Por ejemplo:");

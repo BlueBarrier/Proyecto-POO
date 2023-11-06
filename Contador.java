@@ -22,6 +22,9 @@ import java.time.temporal.ChronoUnit;
 public class Contador {
     private LocalDateTime diaInicio, diaActual;
 
+    /**
+     * @param diaInicio
+     */
     public Contador(LocalDateTime diaInicio) {
         this.diaInicio = diaInicio;
         this.diaActual = LocalDateTime.now();
