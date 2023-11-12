@@ -102,6 +102,21 @@ public class AyudaRecurso {
         System.out.println("--Quote--");
         System.out.println(temp.getFrase());
     }
+    public void crearContacto(String user){
+        String nombre = entrada.pedirContacto();
+        String relacion = entrada.pedirRelacion();
+        int numero = entrada.pedirNumero();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("insert into Contactos_User('User','nombre','relacion','numero') VALUES ('"+
+            user+"','"+nombre+"','"+relacion+"','"+numero+"')");
+            System.out.println("Contacto agregado!");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     
     public void loadContactos(String usuario){
         String url2 = "jdbc:sqlite:./db/userInfo.db";
@@ -109,17 +124,21 @@ public class AyudaRecurso {
             Class.forName("org.sqlite.JDBC");
             connection2 = DriverManager.getConnection(url2);
             state2 = connection2.createStatement();
-
+            
             result2 = state2.executeQuery("select * from Contactos_Profesionales");
             contactos.clear();
             while (result2.next()) {
                 contactos.add(new Contacto(usuario, result2.getString(2),result2.getString(3),result2.getInt(4)));
             }
-    
-            result2 = state2.executeQuery("select * from Contactos_User where User = "+usuario);
+            
+            String selectQuery = "select * from Contactos_User where User = ?";
+            PreparedStatement stmtPrep = connection2.prepareStatement(selectQuery);
+            stmtPrep.setString(1, usuario);
+            ResultSet rest = stmtPrep.executeQuery();
             contactosUser.clear();
-            while (result2.next()) {
-                contactosUser.add(new Contacto(usuario,result2.getString(2),result2.getString(3),result2.getInt(4)));
+            while (rest.next()) {
+                contactosUser.add(new Contacto(usuario,rest.getString("nombre"),rest.getString("relacion"),
+                rest.getInt("numero")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +146,7 @@ public class AyudaRecurso {
     }
     public void mostrarContactos(Usuario user){
         loadContactos(user.getCorreo());
-        user.setContactosEmergencia(contactos);
+        user.setContactosEmergencia(contactosUser);
         System.out.println("-Servicios Profesionales de Ayuda-");
         for (Contacto contact : contactos) {
             System.out.println("\nNombre: "+contact.getNombre()+
@@ -180,6 +199,7 @@ public class AyudaRecurso {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("insert into Sintomas('User','Sintoma','Fecha','Descripcion','Gravedad','Duracion','Accion') VALUES ('"+
             user+"','"+sintoma+"','"+fecha+"','"+descripcion+"','"+gravedad+"','"+duracion+"','"+accion+"')");
+            System.out.println("Sintoma agregado");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -190,7 +210,7 @@ public class AyudaRecurso {
             conn = DriverManager.getConnection(url);
 
             String selectQuery = "select * from Sintomas where User = ?";
-            PreparedStatement stmtPrep = connR.prepareStatement(selectQuery);
+            PreparedStatement stmtPrep = conn.prepareStatement(selectQuery);
             stmtPrep.setString(1, user);
             ResultSet rest = stmtPrep.executeQuery();
 
@@ -251,6 +271,7 @@ public class AyudaRecurso {
             Statement stmt = connR.createStatement();
             stmt.executeUpdate("insert into Reflexiones('User','Fecha','Titulo','Entrada') VALUES ('"+
             user+"','"+fecha+"','"+titulo+"','"+reflex+"')");
+            System.out.println("Reflexión agregada");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -285,5 +306,80 @@ public class AyudaRecurso {
                                "\nReflexión: "+reflex.getEntrada());
         }
     }
+
+    public void addHabitos(Usuario user){
+        ArrayList<String> habitos = entrada.habitosUsuario();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+            Statement stmt = connR.createStatement();
+            for (String habito : habitos) {
+                stmt.executeUpdate("insert into Habitos('User','Habitos') VALUES ('"+
+                user.getCorreo()+"','"+habito+"')");
+            }
+            System.out.println("Habitos agregados");
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+    }
+
+    public ArrayList<String> loadHabitos(String user){
+        ArrayList<String> habitos = new ArrayList<>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+
+            String selectQuery = "select * from Habitos where User = ?";
+            PreparedStatement stmtPrep = connR.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user);
+            ResultSet rest = stmtPrep.executeQuery();
+            
+            habitos.clear();
+            while (rest.next()) {
+                habitos.add(rest.getString("Habitos"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return habitos;
+    }
+    
+    public void addObjetivos(Usuario user){
+        ArrayList<String> objetivos = entrada.pedirObjetivos();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+            Statement stmt = connR.createStatement();
+            for (String objetivo : objetivos) {
+                stmt.executeUpdate("insert into Objetivo('User','Objetivo') VALUES ('"+
+                user.getCorreo()+"','"+objetivo+"')");
+            }
+            System.out.println("Objetivos agregados");
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+    }
+
+    public ArrayList<String> loadObjetivos(String user){
+        ArrayList<String> objetivos = new ArrayList<>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connR = DriverManager.getConnection(urlR);
+
+            String selectQuery = "select * from Objetivo where User = ?";
+            PreparedStatement stmtPrep = connR.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user);
+            ResultSet rest = stmtPrep.executeQuery();
+            
+            objetivos.clear();
+            while (rest.next()) {
+                objetivos.add(rest.getString("Objetivo"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return objetivos;
+    }
+
 
 }
