@@ -120,6 +120,12 @@ public class AyudaRecurso {
         System.out.println("--Quote--");
         System.out.println(temp.getFrase());
     }
+
+    /**
+     * Crea un nuevo contacto para un usuario específico.
+     *
+     * @param user El nombre de usuario al que se asociará el nuevo contacto.
+     */
     public void crearContacto(String user){
         String nombre = entrada.pedirContacto();
         String relacion = entrada.pedirRelacion();
@@ -376,6 +382,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Agrega hábitos a la base de datos para un usuario específico.
+     *
+     * @param user El objeto Usuario al que se asociarán los hábitos.
+     */
     public void addHabitos(Usuario user){
         ArrayList<String> habitos = entrada.habitosUsuario();
         try {
@@ -392,6 +403,12 @@ public class AyudaRecurso {
         } 
     }
 
+    /**
+     * Carga los hábitos asociados a un usuario desde la base de datos.
+     *
+     * @param user El nombre de usuario del cual cargar los hábitos.
+     * @return Una lista de hábitos asociados al usuario.
+     */
     public ArrayList<String> loadHabitos(String user){
         ArrayList<String> habitos = new ArrayList<>();
         try {
@@ -413,6 +430,11 @@ public class AyudaRecurso {
         return habitos;
     }
     
+    /**
+     * Agrega objetivos a la base de datos para un usuario específico.
+     *
+     * @param user El objeto Usuario al que se asociarán los objetivos.
+     */
     public void addObjetivos(Usuario user){
         ArrayList<String> objetivos = entrada.pedirObjetivos();
         try {
@@ -429,6 +451,12 @@ public class AyudaRecurso {
         } 
     }
 
+    /**
+     * Carga los objetivos asociados a un usuario desde la base de datos.
+     *
+     * @param user El nombre de usuario del cual cargar los objetivos.
+     * @return Una lista de objetivos asociados al usuario.
+     */
     public ArrayList<String> loadObjetivos(String user){
         ArrayList<String> objetivos = new ArrayList<>();
         try {

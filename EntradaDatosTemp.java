@@ -501,6 +501,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese el nombre de un contacto.
+     *
+     * @return El nombre ingresado por el usuario.
+     */
     public String pedirContacto(){
         System.out.println("Ingrese el nombre de su contacto: ");
         try {
@@ -513,6 +518,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese la relación que tiene con el contacto (madre, amigo, hermano, etc.).
+     *
+     * @return La relación ingresada por el usuario.
+     */
     public String pedirRelacion(){
         System.out.println("Ingrese el parentesco que tiene el contacto(madre, amigo, hermano): ");
         try {
@@ -525,6 +535,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese un número de teléfono para un contacto.
+     *
+     * @return El número de teléfono ingresado por el usuario como un entero.
+     */
     public int pedirNumero(){
         System.out.println("Ingrese el número de teléfono del contacto (8 dígitos sin espacio):");
         try {
