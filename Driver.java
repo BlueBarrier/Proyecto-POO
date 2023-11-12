@@ -10,12 +10,13 @@
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * La clase Driver es la clase principal del programa que interactúa con el
  * usuario y controla la lógica del programa.
+ * 
+ * Desde aqui se controla el programa
  */
 
 public class Driver {
@@ -43,7 +44,7 @@ public class Driver {
                         Class.forName("org.sqlite.JDBC");
                         conn = DriverManager.getConnection(url);
                         Statement state = conn.createStatement();
-                        ResultSet rest = state.executeQuery("select * from User");
+                        ResultSet rest = state.executeQuery("select * from Usuarios");
 
                         while (rest.next()) {
                             String[] frecString = rest.getString(8).split(",");
@@ -54,7 +55,7 @@ public class Driver {
                                 user = new Usuario(rest.getString(2), correo, password, rest.getInt(5),
                                         rest.getString(6),
                                         rest.getString(7), frecuencia, null,
-                                        null, null, null, new Contador(LocalDateTime.parse(rest.getString(9))), null);
+                                        new ArrayList<>(), null, null, new Contador(LocalDateTime.parse(rest.getString(9))), null);
                                 logIn = true;
                             }
                         }
@@ -64,13 +65,16 @@ public class Driver {
 
                     break;
                 case 2:
-                    String nombreNuevo = entrada.pedirNombre();
+                    String nombre = entrada.nombre();
                     String correoNuevo = entrada.pedirCorreo();
                     String passwordNuevo = entrada.pedirPassword();
 
-                    int edadNuevo = 0;
-                    String generoNuevo = null;
-                    String ciudadNueva = null;
+                    int edad = entrada.pedirEdad();
+                    String sexo = entrada.pedirSexo();
+                    String ciudad = entrada.pedirCiudad();
+                    String freq = entrada.pedirFreq();
+                    LocalDateTime fechaNow = LocalDateTime.now();
+
 
                     try {
                         Class.forName("org.sqlite.JDBC");
@@ -126,10 +130,15 @@ public class Driver {
                     user.getContador().mostrarDiasSobrio();
                     break;
                 case 2:
-                    user.getHabitos().setHabitosUsuario(entrada.habitosUsuario());
+                    ayuda.addHabitos(user);
+                    System.out.println("\n--OBJETIVOS--");
+                    ayuda.addObjetivos(user);
+                    user.setHabitos(new Habito(new ArrayList<>(),ayuda.loadHabitos(user.getCorreo()),
+                     new ArrayList<>(), new ArrayList<>()));
+                    user.getHabitos().analizarHabitos();
+                    user.setObjetivos(ayuda.loadObjetivos(user.getCorreo()));
                     user.getHabitos().chunkingObjetivos(user.getObjetivos());
                     user.getHabitos().reemplazarHabitos();
-
                     break;
                 case 3:
                     try {
@@ -156,27 +165,35 @@ public class Driver {
                 case 6:
                     info.mostrarMultimedia();
                     break;
-                case 7:
-                    ayuda.mostrarContactos(user);
+                case 7: 
+                    ayuda.crearContacto(user.getCorreo());
                     break;
                 case 8:
-                    ayuda.mostrarEjercicio();
+                    try {
+                        ayuda.mostrarContactos(user);
+                    } catch (Exception e) {
+                        System.out.println("Ingrese un contacto primero");
+                        e.printStackTrace();
+                    }
                     break;
                 case 9:
-                    ayuda.mostrarConsejo();
+                    ayuda.mostrarEjercicio();
                     break;
                 case 10:
-                    ayuda.mostrarQuote();
+                    ayuda.mostrarConsejo();
                     break;
                 case 11:
                     ayuda.mostrarQuote();
-                    ayuda.addSintoma(user.getCorreo());
                     break;
                 case 12:
+                    ayuda.mostrarQuote();
+                    ayuda.addSintoma(user.getCorreo());
+                    break;
+                case 13:
                     System.out.println("\n¡¡Expresate!!\n");
                     ayuda.addReflexion(user.getCorreo());
                     break;
-                case 13:
+                case 14:
                     try {
                         ayuda.mostrarReflexiones(user);
                     } catch (Exception e) {
@@ -184,7 +201,7 @@ public class Driver {
                         e.printStackTrace();
                     }
                     break;
-                case 14:
+                case 15:
                     try {
                         ayuda.mostrarSintomas(user);
                         if (user.getSintomas().size() > 3) {
@@ -196,7 +213,7 @@ public class Driver {
                         e.printStackTrace();
                     }
                     break;
-                case 15:
+                case 16:
                     System.out.println("Saliendo...");
                     scan.close();
                     return;

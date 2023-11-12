@@ -100,20 +100,21 @@ public class EntradaDatosTemp {
     public int menu() {
         System.out.println("---Menu----" +
                 "\n1. ver días sobrio" +
-                "\n2. crear hábitos" +
+                "\n2. crear hábitos y objetivos" +
                 "\n3. ver hábitos a realizar" +
                 "\n4. ver hábitos a cambiar" +
                 "\n5. Mostrar artículos" +
                 "\n6. Mostrar videos" +
-                "\n7. Mostrar Contactos" +
-                "\n8. Mostrar un ejercicio" +
-                "\n9. Mostrar un consejo" +
-                "\n10. Mostrar una frase motivadora" +
-                "\n11. Ingresar un sintoma" +
-                "\n12. Crear una reflexión" +
-                "\n13. Mostrar reflexiones" +
-                "\n14. Mostrar sintomas" +
-                "\n15. salir");
+                "\n7. Crear contactos"+
+                "\n8. Mostrar Contactos" +
+                "\n9. Mostrar un ejercicio" +
+                "\n10. Mostrar un consejo" +
+                "\n11. Mostrar una frase motivadora" +
+                "\n12. Ingresar un sintoma" +
+                "\n13. Crear una reflexión" +
+                "\n14. Mostrar reflexiones" +
+                "\n15. Mostrar sintomas" +
+                "\n16. salir");
         try {
             int respuesta = scan.nextInt();
             scan.nextLine();
@@ -135,41 +136,6 @@ public class EntradaDatosTemp {
         System.out.println("Ingrese su nombre: ");
         String nombre = scan.nextLine();
         return nombre;
-    }
-
-    /**
-     * Pide al usuario una lista de objetivos y la devuelve en forma de ArrayList de
-     * cadenas.
-     *
-     * @return Una lista de objetivos ingresados por el usuario.
-     */
-
-    public ArrayList<String> Objetivos() {
-        boolean salir = false;
-        ArrayList<String> objetivos = new ArrayList<>();
-        while (!salir) {
-            System.out.println("Ingrese un objetivo que quiera cumplir: ");
-            String objetivo = scan.nextLine();
-            objetivos.add(objetivo.trim().toLowerCase());
-            System.out.println("\n ¿Desea agregar otro?" +
-                    "\n1.Si" +
-                    "\n2.No");
-            try {
-                int respuesta = scan.nextInt();
-                scan.nextLine();
-                if (respuesta == 2) {
-                    salir = true;
-                }
-            } catch (Exception e) {
-                System.out.println("ingrese un valor entero entre 1 o 2: ");
-                int respuesta = scan.nextInt();
-                scan.nextLine();
-                if (respuesta == 2) {
-                    salir = true;
-                }
-            }
-        }
-        return objetivos;
     }
 
     /**
@@ -217,16 +183,19 @@ public class EntradaDatosTemp {
         boolean salir = false;
         ArrayList<String> habitosSeleccionados = new ArrayList<>();
         ArrayList<String> todosLosHabitos = new ArrayList<>(Arrays.asList(
-                "ejercicio", "alimentación", "hidratación", "sueño", "meditación",
-                "gratitud", "lectura", "aprender", "socialización", "familia",
+                "ejercicio","hidratación", "sueño", "meditación",
+                "lectura", "aprender", "socialización", 
                 "alcohol", "drogas", "tabaco", "comida chatarra", "sedentarismo",
-                "insomnio", "pantallas", "cafeína", "aislamiento", "rumiación",
-                "CocaCola", "seguido", "En exceso"));
+                "insomnio", "cafeína", "aislamiento", 
+                "CocaCola"));
         while (!salir) {
             System.out.println("Lista de hábitos disponibles:");
-            for (int i = 0; i < todosLosHabitos.size(); i++) {
-                System.out.println((i + 1) + ". " + todosLosHabitos.get(i));
-            }
+            System.out.println("\n1. ejercicio \t 2. hidratación \t 3. Dormir temprano"+
+                               "\n4. meditación \t5. lectura \t6. aprender"+
+                               "\n7. socialización \t8. alcohol \t 9. drogas"+
+                               "\n10. tabaco \t11. comida chatarra \t12. sedentarismo"+
+                               "\n13. insomnio \t14. cafeína \t15. aislamiento"+
+                               "\n16. CocaCola");
 
             System.out.print("Elija un hábito (o 0 para salir): ");
             int opcion = scan.nextInt();
@@ -443,5 +412,172 @@ public class EntradaDatosTemp {
             pedirPassword();
         }
         return "";
+    }
+
+    /**
+     * @return pide la edad
+     */
+    public int pedirEdad(){
+        System.out.println("Ingrese su edad: ");
+        try {
+            int edad = scan.nextInt();
+            scan.nextLine();
+            if (edad>0) {
+                return edad;
+            }else{pedirEdad();}
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirEdad();
+        }
+        return 0;
+    }
+
+    /**
+     * @return pide el sexo
+     */
+    public String pedirSexo(){
+        System.out.println("Ingrese su sexo (Masculino o Femenino): ");
+        try {
+            String sexo = scan.nextLine().trim();
+            return sexo;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirSexo();
+        }
+        return "";
+    }
+
+    /**
+     * @return pide la ciudad
+     */
+    public String pedirCiudad(){
+        System.out.println("Ingrese su ciudad: ");
+        try {
+            String city = scan.nextLine().trim();
+            return city;
+        } catch (Exception e) {
+            System.out.println(e);
+            pedirCiudad();
+        }
+        return "";
+    }
+
+    /**
+     * @return pide el intervalo de frecuencia de consumo
+     */
+    public String pedirFreq(){
+        System.out.println("Ingrese un intervalo de frecuencia de consumo (Ej.: 2,5): ");
+        System.out.println("\n Este se refiere a ingresar un día mínimo y uno máximo. Por ejemplo:");
+        System.out.println("Si consume CocaCola de dos a tres días a la semana, entonces ingrese: ");
+        System.out.println("2,3  De esta manera se podrá tener un registro de su consumo");
+        try {
+            String intervalo = scan.nextLine();
+
+            try {
+                String[] interv = intervalo.split(",");
+                try {
+                    int init = Integer.parseInt(interv[0]);
+                    try {
+                        int fin = Integer.parseInt(interv[1]);
+                        int[] frequ = {init, fin};
+                        System.out.println(frequ.toString());
+                        return intervalo;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        pedirFreq();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ingrese un número válido");
+                    pedirFreq();
+                }
+            } catch (Exception e) {
+                System.out.println("Separe los números con una coma");
+                pedirFreq();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            pedirFreq();
+        }
+        return "";
+    }
+
+    public String pedirContacto(){
+        System.out.println("Ingrese el nombre de su contacto: ");
+        try {
+            String nombre = scan.nextLine();
+            return nombre;
+        } catch (Exception e) {
+            System.out.println("Ingreso invalido");
+            pedirContacto();
+        }
+        return "";
+    }
+
+    public String pedirRelacion(){
+        System.out.println("Ingrese el parentesco que tiene el contacto(madre, amigo, hermano): ");
+        try {
+            String par = scan.nextLine();
+            return par;
+        } catch (Exception e) {
+            System.out.println("Ingreso invalido");
+            pedirRelacion();
+        }
+        return "";
+    }
+
+    public int pedirNumero(){
+        System.out.println("Ingrese el número de teléfono del contacto (8 dígitos sin espacio):");
+        try {
+            String num = scan.nextLine();
+            scan.nextLine();
+            if (num.length() == 8) {
+                try {
+                    int numInt = Integer.parseInt(num);
+                    return numInt;
+                } catch (Exception e) {
+                    System.out.println("Ingrese una opción valida");
+                    pedirNumero();
+                }
+            }else{
+                System.out.println("Verifique que sean 8 dígitos");
+                pedirNumero();
+            }
+        } catch (Exception e) {
+            System.out.println("Ingreso inválido!");
+            pedirNumero();
+        }
+        return 0;
+    }
+
+
+    /**
+     * Pide al usuario una lista de objetivos y la devuelve en forma de ArrayList de
+     * cadenas.
+     *
+     * @return Una lista de objetivos ingresados por el usuario.
+     */
+
+    public ArrayList<String> pedirObjetivos(){
+        ArrayList<String> objetivos = new ArrayList<>();
+        System.out.println("¿Cuántas metas desea cumplir?");
+        try {
+            int num = scan.nextInt();
+            scan.nextLine();
+            for (int i = 0; i < num; i++) {
+                System.out.println("Ingrese una meta que quiera cumplir: ");
+                try {
+                    String objetivo = scan.nextLine().trim();
+                    objetivos.add(objetivo);
+                } catch (Exception e) {
+                    System.out.println("Ingreso invalido");
+                    pedirObjetivos();
+                }
+            }
+            return objetivos;
+        } catch (Exception e) {
+            System.out.println("Ingreso inválido");
+            pedirObjetivos();
+        }
+        return null;
     }
 }

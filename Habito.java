@@ -193,10 +193,10 @@ public class Habito {
     public void chunkingObjetivos(ArrayList<String> objetivos){
         for (String objetivo : objetivos) {
             System.out.println("\n Piensa en los recursos que necesitas para lograr este objetivo\n");
-            System.out.printf("\nGenial!! ahora: ¿Cómo puedes dividir este objetivo (%s) en subobjetivos más específicos y realistas? ",objetivo );
+            System.out.printf("\nGenial!! ahora: ¿Cómo puedes dividir este objetivo '(%s)' en subobjetivos más específicos y realistas? ",objetivo );
             ArrayList<String> subObjetivos = entrada.pedirSubObjetivos(); // solicitud de data
             for (String subObjetivo : subObjetivos) {
-                System.out.printf("\n¿Qué acciones concretas vas a realizar para poder realizar (%s) (se concret@)?", subObjetivo);
+                System.out.printf("\n¿Qué acciones concretas vas a realizar para poder realizar '(%s)' (se concret@)?", subObjetivo);
                 ArrayList<String> tempAcciones = entrada.pedirAcciones(); // solicitud de data
                 objetivosChunked.addAll(tempAcciones);
             }
