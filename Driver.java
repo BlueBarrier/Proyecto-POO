@@ -68,12 +68,12 @@ public class Driver {
                     String nombre = entrada.nombre();
                     String correoNuevo = entrada.pedirCorreo();
                     String passwordNuevo = entrada.pedirPassword();
-
                     int edad = entrada.pedirEdad();
                     String sexo = entrada.pedirSexo();
                     String ciudad = entrada.pedirCiudad();
                     String freq = entrada.pedirFreq();
                     LocalDateTime fechaNow = LocalDateTime.now();
+                    String genero = entrada.pedirSexo();
 
 
                     try {
@@ -87,12 +87,12 @@ public class Driver {
                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                         PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
-                        preparedStatement.setString(1, nombreNuevo);
+                        preparedStatement.setString(1, nombre);
                         preparedStatement.setString(2, correoNuevo);
                         preparedStatement.setString(3, passwordNuevo);
-                        preparedStatement.setInt(4, edadNuevo);
-                        preparedStatement.setString(5, generoNuevo);
-                        preparedStatement.setString(6, ciudadNueva);
+                        preparedStatement.setInt(4, edad);
+                        preparedStatement.setString(5, genero);
+                        preparedStatement.setString(6, ciudad);
                         preparedStatement.setString(7, "0,0");
                         preparedStatement.setString(8, LocalDateTime.now().toString());
 
