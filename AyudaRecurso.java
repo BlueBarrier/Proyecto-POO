@@ -59,21 +59,7 @@ public class AyudaRecurso {
   
         } catch (Exception e) {
             e.printStackTrace();
-        } finally{
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (state != null) {
-                    state.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        } 
     }
 
     public void mostrarEjercicio(){
