@@ -1,9 +1,12 @@
-
-/**
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Programación Orientada a Objetos
- */
+//************************************************************************
+//Universidad del Valle de Guatemala
+//Departamento de Ciencia de la Computación
+//Autor: Marielos Ortiz, Luisa Jiménez, Erick Barrera
+//Carné: 23882, 23011, 231238
+//CC2008 - 50
+//Fecha: Noviembre de 2023
+//Descripción: Proyecto Final
+//************************************************************************
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -172,6 +175,10 @@ public class EntradaDatosTemp {
         return contactos;
     }
 
+    /**
+     * Permite que el usuario seleccione hábitos de una lista y agregarlos a una lista personal de hábitos.
+     * @return Un ArrayList de cadenas que contiene los hábitos seleccionados por el usuario.
+     */
     public ArrayList<String> habitosUsuario() {
         boolean salir = false;
         ArrayList<String> habitosSeleccionados = new ArrayList<>();
@@ -234,7 +241,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return String del sintoma que se sufre
+     * Solicita al usuario que ingrese un síntoma y devuelve la cadena introducida por el usuario.
+     * @return La cadena que representa el síntoma ingresado por el usuario.
      */
     public String pedirSintoma() {
         System.out.println("Ingrese el sintoma que sufrió: ");
@@ -249,7 +257,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return String de lo ocurrido con el sintoma
+     * Solicita al usuario que describa un síntoma y devuelve la descripción introducida por el usuario.
+     * @return La descripción del síntoma ingresada por el usuario.
      */
     public String pedirSDescripcion() {
         System.out.println("Describa el sintoma que aconteció: ");
@@ -264,7 +273,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return una escala de la gravedad del sintoma
+     * Solicita al usuario que ingrese un valor de gravedad en una escala del 1 al 10 y devuelve el valor ingresado.
+     * @return El valor de gravedad en una escala del 1 al 10 ingresado por el usuario.
      */
     public int pedirSGravedad() {
         System.out.println("Ingrese la gravedad en una escala del 1 al 10:");
@@ -285,7 +295,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return la cantidad que duro el sintoma
+     * Solicita al usuario que ingrese la duración en minutos de una acción y devuelve el valor ingresado.
+     * @return La duración en minutos de una acción ingresada por el usuario.
      */
     public int pedirSDuracion() {
         System.out.println("Ingrese la cantidad de minutos que duró: ");
@@ -305,8 +316,9 @@ public class EntradaDatosTemp {
         return 0;
     }
 
-    /** 
-     * @return pide la accion que realizó el usuario luego del sintoma, como tomar una pastilla o beber
+    /**
+     * Solicita al usuario que describa una acción y devuelve la descripción ingresada por el usuario.
+     * @return La descripción de una acción ingresada por el usuario.
      */
     public String pedirSAccion() {
         System.out.println("Describa la acción que tomó:");
@@ -315,7 +327,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return pide el título de la reflexión
+     * Solicita al usuario que ingrese el título de una reflexión y devuelve el título ingresado.
+     * @return El título de la reflexión ingresado por el usuario.
      */
     public String pedirRTitulo() {
         System.out.println("Ingresa el título de tu reflexión: ");
@@ -330,7 +343,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return pide que ingrese la reflexión
+     * Solicita al usuario que ingrese una reflexión y devuelve la reflexión ingresada.
+     * @return La reflexión ingresada por el usuario.
      */
     public String pedirREntrada() {
         System.out.println("Ingresa tu reflexión:");
@@ -345,7 +359,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return menu para el inició del programa
+     * Solicita al usuario que seleccione una opción de inicio de sesión o creación de usuario en el programa contra adicciones.
+     * @return Un entero que representa la opción seleccionada por el usuario (1 para iniciar sesión, 2 para crear usuario).
      */
     public int logIn() {
         System.out.println("--Programa Contra Adicciones--");
@@ -384,7 +399,8 @@ public class EntradaDatosTemp {
     }
 
     /**
-     * @return pide la contraseña
+     * Solicita al usuario que ingrese su contraseña y devuelve la contraseña ingresada.
+     * @return La contraseña ingresada por el usuario.
      */
     public String pedirPassword() {
         System.out.println("Ingrese su contraseña: ");
@@ -485,6 +501,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese el nombre de un contacto.
+     *
+     * @return El nombre ingresado por el usuario.
+     */
     public String pedirContacto(){
         System.out.println("Ingrese el nombre de su contacto: ");
         try {
@@ -497,6 +518,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese la relación que tiene con el contacto (madre, amigo, hermano, etc.).
+     *
+     * @return La relación ingresada por el usuario.
+     */
     public String pedirRelacion(){
         System.out.println("Ingrese el parentesco que tiene el contacto(madre, amigo, hermano): ");
         try {
@@ -509,6 +535,11 @@ public class EntradaDatosTemp {
         return "";
     }
 
+    /**
+     * Solicita al usuario que ingrese un número de teléfono para un contacto.
+     *
+     * @return El número de teléfono ingresado por el usuario como un entero.
+     */
     public int pedirNumero(){
         System.out.println("Ingrese el número de teléfono del contacto (8 dígitos sin espacio):");
         try {

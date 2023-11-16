@@ -14,6 +14,7 @@
  */
 
 import java.util.ArrayList;
+
 public class Usuario {
 
     private String nombre, correo, password, sexo, ciudad;

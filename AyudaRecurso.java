@@ -14,6 +14,11 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * La clase AyudaRecurso proporciona funcionalidad para interactuar con recursos relacionados con la ayuda y el apoyo
+ * en el programa contra adicciones, incluyendo ejercicios, consejos, citas, contactos, síntomas y reflexiones.
+ */
 public class AyudaRecurso {
     EntradaDatosTemp entrada = new EntradaDatosTemp();
     private ArrayList<Ejercicio> ejercicios = new ArrayList<>();
@@ -30,6 +35,9 @@ public class AyudaRecurso {
     ResultSet result2 = null;
     Statement state2 = null;
     
+    /**
+     * Lee los datos de ejercicios, consejos y citas desde la base de datos y los almacena en las listas correspondientes.
+     */
     public void leerData(){
         String url = "jdbc:sqlite:./db/ayuda.db";
         try {
@@ -62,6 +70,9 @@ public class AyudaRecurso {
         } 
     }
 
+    /**
+     * Muestra un ejercicio aleatorio de la lista de ejercicios.
+     */
     public void mostrarEjercicio(){
         Random rand = new Random();
         int indice = rand.nextInt(0, 12);
@@ -73,6 +84,10 @@ public class AyudaRecurso {
                          "\nDuración: "+temp.getDuracion()+
                          "\nRepeticiones: "+temp.getRepeticiones());
     }
+
+    /**
+     * Muestra un consejo aleatorio de la lista de consejos.
+     */
     public void mostrarConsejo(){
         Random rand = new Random();
         int indice = rand.nextInt(0,20);
@@ -81,6 +96,9 @@ public class AyudaRecurso {
         System.out.println(temp.getFrase());
     }
 
+    /**
+     * Muestra una cita aleatoria de la lista de citas.
+     */
     public void mostrarQuote(){
         Random rand = new Random();
         int indice = rand.nextInt(0,10);
@@ -88,6 +106,12 @@ public class AyudaRecurso {
         System.out.println("--Quote--");
         System.out.println(temp.getFrase());
     }
+
+    /**
+     * Crea un nuevo contacto para un usuario específico.
+     *
+     * @param user El nombre de usuario al que se asociará el nuevo contacto.
+     */
     public void crearContacto(String user){
         String nombre = entrada.pedirContacto();
         String relacion = entrada.pedirRelacion();
@@ -104,6 +128,11 @@ public class AyudaRecurso {
         }
     }
     
+    /**
+     * Carga los contactos desde la base de datos de usuarios y profesionales de ayuda.
+     *
+     * @param usuario El nombre de usuario para el cual se cargan los contactos.
+     */
     public void loadContactos(String usuario){
         String url2 = "jdbc:sqlite:./db/userInfo.db";
         try {
@@ -130,6 +159,12 @@ public class AyudaRecurso {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Muestra los contactos profesionales de ayuda y personales de un usuario.
+     *
+     * @param user El usuario para el cual se muestran los contactos.
+     */
     public void mostrarContactos(Usuario user){
         loadContactos(user.getCorreo());
         user.setContactosEmergencia(contactosUser);
@@ -148,6 +183,10 @@ public class AyudaRecurso {
     }
     private String url = "jdbc:sqlite:./db/userInfo.db";
     private static Connection conn = null;
+
+    /**
+     * Comprueba la existencia de la tabla de síntomas en la base de datos y la crea si no existe.
+     */
     public void checkSintomas(){
         String query = "CREATE TABLE IF NOT EXISTS Sintomas ("+
         " User TEXT NOT NULL,"+
@@ -169,6 +208,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Agrega un síntoma a la base de datos.
+     *
+     * @param user El nombre de usuario para el cual se agrega el síntoma.
+     */
     public void addSintoma(String user){
         checkSintomas();
         String sintoma = entrada.pedirSintoma();
@@ -190,6 +234,12 @@ public class AyudaRecurso {
             System.out.println(e);
         }
     }
+
+    /**
+     * Carga los síntomas del usuario desde la base de datos.
+     *
+     * @param user El usuario para el cual se cargan los síntomas.
+     */
     public void loadSintomas(String user){
         try {
             Class.forName("org.sqlite.JDBC");
@@ -210,6 +260,12 @@ public class AyudaRecurso {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Muestra los síntomas de un usuario.
+     *
+     * @param user El usuario para el cual se muestran los síntomas.
+     */
     public void mostrarSintomas(Usuario user){
         loadSintomas(user.getCorreo());
         user.setSintomas(sintomas);
@@ -226,6 +282,10 @@ public class AyudaRecurso {
 
     private String urlR = "jdbc:sqlite:./db/userInfo.db";
     private static Connection connR = null;
+
+    /**
+     * Comprueba la existencia de la tabla de reflexiones en la base de datos y la crea si no existe.
+     */
     public void checkReflexion(){
         String query = "CREATE TABLE IF NOT EXISTS Reflexiones ("+
         " User TEXT NOT NULL,"+
@@ -244,6 +304,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Agrega una reflexión a la base de datos.
+     *
+     * @param user El nombre de usuario para el cual se agrega la reflexión.
+     */
     public void addReflexion(String user){
         checkReflexion();
         LocalDateTime fechaDateTime = LocalDateTime.now();
@@ -263,6 +328,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Carga las reflexiones del usuario desde la base de datos.
+     *
+     * @param user El usuario para el cual se cargan las reflexiones.
+     */
     public void loadReflexiones(String user){
         try {
             Class.forName("org.sqlite.JDBC");
@@ -283,6 +353,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Muestra las reflexiones de un usuario.
+     *
+     * @param user El usuario para el cual se muestran las reflexiones.
+     */
     public void mostrarReflexiones(Usuario user){
         loadReflexiones(user.getCorreo());
         user.setReflexiones(reflexiones);
@@ -293,6 +368,11 @@ public class AyudaRecurso {
         }
     }
 
+    /**
+     * Agrega hábitos a la base de datos para un usuario específico.
+     *
+     * @param user El objeto Usuario al que se asociarán los hábitos.
+     */
     public void addHabitos(Usuario user){
         ArrayList<String> habitos = entrada.habitosUsuario();
         try {
@@ -309,6 +389,12 @@ public class AyudaRecurso {
         } 
     }
 
+    /**
+     * Carga los hábitos asociados a un usuario desde la base de datos.
+     *
+     * @param user El nombre de usuario del cual cargar los hábitos.
+     * @return Una lista de hábitos asociados al usuario.
+     */
     public ArrayList<String> loadHabitos(String user){
         ArrayList<String> habitos = new ArrayList<>();
         try {
@@ -330,6 +416,11 @@ public class AyudaRecurso {
         return habitos;
     }
     
+    /**
+     * Agrega objetivos a la base de datos para un usuario específico.
+     *
+     * @param user El objeto Usuario al que se asociarán los objetivos.
+     */
     public void addObjetivos(Usuario user){
         ArrayList<String> objetivos = entrada.pedirObjetivos();
         try {
@@ -346,6 +437,12 @@ public class AyudaRecurso {
         } 
     }
 
+    /**
+     * Carga los objetivos asociados a un usuario desde la base de datos.
+     *
+     * @param user El nombre de usuario del cual cargar los objetivos.
+     * @return Una lista de objetivos asociados al usuario.
+     */
     public ArrayList<String> loadObjetivos(String user){
         ArrayList<String> objetivos = new ArrayList<>();
         try {

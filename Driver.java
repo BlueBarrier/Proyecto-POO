@@ -1,9 +1,12 @@
-
-/**
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Programación Orientada a Objetos
- */
+//************************************************************************
+//Universidad del Valle de Guatemala
+//Departamento de Ciencia de la Computación
+//Autor: Marielos Ortiz, Luisa Jiménez, Erick Barrera
+//Carné: 23882, 23011, 231238
+//CC2008 - 50
+//Fecha: Noviembre de 2023
+//Descripción: Proyecto Final
+//************************************************************************
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,12 +78,25 @@ public class Driver {
 
                     try {
                         Class.forName("org.sqlite.JDBC");
-                        conn = DriverManager.getConnection(url); 
-                        Statement stmt = conn.createStatement();
-                        
-                        int rowsInserted = stmt.executeUpdate(
-                            "INSERT INTO Usuarios (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) VALUES('"+
-                            nombre+"','"+correoNuevo+"','"+passwordNuevo+"','"+edad+"','"+sexo+"','"+ciudad+"','"+freq+"','"+fechaNow+"')");
+                        conn = DriverManager.getConnection(url);
+
+                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (Está pendiente)
+
+                        String insertQuery = "INSERT INTO User (nombre, correo, password, edad, genero, ciudad, frecuencia, fecha_inicio) "
+                                +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
+                        preparedStatement.setString(1, nombreNuevo);
+                        preparedStatement.setString(2, correoNuevo);
+                        preparedStatement.setString(3, passwordNuevo);
+                        preparedStatement.setInt(4, edadNuevo);
+                        preparedStatement.setString(5, generoNuevo);
+                        preparedStatement.setString(6, ciudadNueva);
+                        preparedStatement.setString(7, "0,0");
+                        preparedStatement.setString(8, LocalDateTime.now().toString());
+
+                        int rowsInserted = preparedStatement.executeUpdate();
 
                         if (rowsInserted > 0) {
                             System.out.println("Nuevo usuario creado con éxito.");
