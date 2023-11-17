@@ -69,10 +69,7 @@ public class Driver {
                     String correoNuevo = entrada.pedirCorreo();
                     String passwordNuevo = entrada.pedirPassword();
                     int edad = entrada.pedirEdad();
-                    String sexo = entrada.pedirSexo();
                     String ciudad = entrada.pedirCiudad();
-                    String freq = entrada.pedirFreq();
-                    LocalDateTime fechaNow = LocalDateTime.now();
                     String genero = entrada.pedirSexo();
 
 
@@ -93,7 +90,7 @@ public class Driver {
                         preparedStatement.setInt(4, edad);
                         preparedStatement.setString(5, genero);
                         preparedStatement.setString(6, ciudad);
-                        preparedStatement.setString(7, "0,0");
+                        preparedStatement.setString(7, "2,3");
                         preparedStatement.setString(8, LocalDateTime.now().toString());
 
                         int rowsInserted = preparedStatement.executeUpdate();
