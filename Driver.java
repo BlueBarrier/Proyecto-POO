@@ -79,7 +79,7 @@ public class Driver {
 
                         // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (Está pendiente)
 
-                        String insertQuery = "INSERT INTO User (nombre, correo, password, edad, genero, ciudad, frecuencia, fecha_inicio) "
+                        String insertQuery = "INSERT INTO Usuarios (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) "
                                 +
                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
