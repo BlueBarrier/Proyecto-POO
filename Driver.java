@@ -77,8 +77,6 @@ public class Driver {
                         Class.forName("org.sqlite.JDBC");
                         conn = DriverManager.getConnection(url);
 
-                        // Acá la consulta a SQL para insertar un nuevo usuario en la base de datos. (Está pendiente)
-
                         String insertQuery = "INSERT INTO Usuarios (nombre, correo, password, edad, sexo, ciudad, frecuencia, fecha) "
                                 +
                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
