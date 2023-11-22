@@ -136,14 +136,12 @@ public class Driver {
                     user.setObjetivos(ayuda.loadObjetivos(user.getCorreo()));
                     user.getHabitos().chunkingObjetivos(user.getObjetivos());
                     user.getHabitos().reemplazarHabitos();
+                    user.getHabitos().addHabitos(user);
+
                     break;
                 case 3:
-                    user.setHabitos(new Habito(new ArrayList<>(),ayuda.loadHabitos(user.getCorreo()),
-                     new ArrayList<>(), new ArrayList<>()));
-                    user.getHabitos().analizarHabitos();
-                    user.setObjetivos(ayuda.loadObjetivos(user.getCorreo()));
-                    user.getHabitos().chunkingObjetivos(user.getObjetivos());
-                    user.getHabitos().reemplazarHabitos();                    try {
+                    user.getHabitos().loadHabitos(user);
+                    try {
                         for (String habito : user.getHabitos().getHabitosNuevos()) {
                             System.out.println("Hábito: " + habito);
                         }
@@ -153,12 +151,7 @@ public class Driver {
                     }
                     break;
                 case 4:
-                user.setHabitos(new Habito(new ArrayList<>(),ayuda.loadHabitos(user.getCorreo()),
-                     new ArrayList<>(), new ArrayList<>()));
-                    user.getHabitos().analizarHabitos();
-                    user.setObjetivos(ayuda.loadObjetivos(user.getCorreo()));
-                    user.getHabitos().chunkingObjetivos(user.getObjetivos());
-                    user.getHabitos().reemplazarHabitos();
+                    user.getHabitos().loadHabitos(user);
                     try {
                         for (String habito : user.getHabitos().getHabitosReemplazar()) {
                             System.out.println("Hábito a reemplazar: " + habito);

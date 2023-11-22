@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -160,6 +161,93 @@ public class Habito {
         habitosNuevos.addAll(habitosMantener);
         habitosNuevos.addAll(objetivosChunked);
     }
+
+    /**
+     * 
+     * Guarda la lista de habitos en una tabla
+     * 
+     * @param user
+     */
+    public void addHabitos(Usuario user){
+        try {
+            ArrayList<String> habitosR = user.getHabitos().getHabitosReemplazar();
+            ArrayList<String> habitosN = user.getHabitos().getHabitosNuevos();
+            ArrayList<String> ObjetivosC = user.getHabitos().getObjetivosChunked();
+            
+            try {
+                Class.forName("org.sqlite.JDBC");
+                Connection conn = DriverManager.getConnection("jdbc:sqlite:./db/userInfo.db");
+                Statement stmt = conn.createStatement();
+    
+                for (String habito : habitosR) {
+                    stmt.executeUpdate("insert into HabitosR('User','habito') VALUES ('"+
+                    user.getCorreo()+"','"+habito+"')");
+                }
+                for (String habito : habitosN) {
+                    stmt.executeUpdate("insert into HabitosN('User','habito') VALUES ('"+
+                    user.getCorreo()+"','"+habito+"')");
+                }
+                for (String obj : ObjetivosC) {
+                    stmt.executeUpdate("insert into ObjetivosC('User','chunked') VALUES ('"+
+                    user.getCorreo()+"','"+obj+"')");
+                }
+                System.out.println("Habitos Guardados");
+
+            } catch (Exception e) {
+                System.out.println(e);
+            } 
+        } catch (Exception e) {
+            System.out.println("Cree sus hábitos primero");
+        }
+    }
+
+    /**
+     * carga los habitos de las tablas y los asigna al usuario
+     * 
+     * @param user
+     */
+    public void loadHabitos(Usuario user){
+        ArrayList<String> habitosR = new ArrayList<>();
+        ArrayList<String> habitosN = new ArrayList<>();
+        ArrayList<String> ObjetivosC = new ArrayList<>();
+        try {
+           Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:./db/userInfo.db");
+            
+            String selectQuery = "select * from HabitosR where User = ?";
+            PreparedStatement stmtPrep = conn.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user.getCorreo());
+            ResultSet rest = stmtPrep.executeQuery();
+            habitosR.clear();
+            while (rest.next()) {
+                habitosR.add(rest.getString("habito"));
+            }
+            user.getHabitos().setHabitosReemplazar(habitosR);
+            
+            selectQuery = "select * from HabitosN where User = ?";
+            stmtPrep = conn.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user.getCorreo());
+            rest = stmtPrep.executeQuery();
+            habitosN.clear();
+            while (rest.next()) {
+                habitosN.add(rest.getString("habito"));
+            }
+            user.getHabitos().setHabitosNuevos(habitosN);
+            
+            selectQuery = "select * from ObjetivosC where User = ?";
+            stmtPrep = conn.prepareStatement(selectQuery);
+            stmtPrep.setString(1, user.getCorreo());
+            rest = stmtPrep.executeQuery();
+            ObjetivosC.clear();
+            while (rest.next()) {
+                ObjetivosC.add(rest.getString("chunked"));
+            }
+            user.getHabitos().setObjetivosChunked(ObjetivosC);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * @return lista de habitos buenos y malos del usuario

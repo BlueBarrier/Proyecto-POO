@@ -23,33 +23,60 @@ public class Contador {
     private LocalDateTime diaInicio, diaActual;
 
     /**
-     * @param diaInicio
+     * Constructor para la clase Contador.
+     *
+     * @param diaInicio La fecha de inicio.
      */
     public Contador(LocalDateTime diaInicio) {
         this.diaInicio = diaInicio;
         this.diaActual = LocalDateTime.now();
     }
 
-    public LocalDateTime getdiaInicio() {
+    /**
+     * Devuelve la fecha de inicio.
+     *
+     * @return La fecha de inicio.
+     */
+    public LocalDateTime getDiaInicio() {
         return diaInicio;
     }
 
+    /**
+     * Establece la fecha de inicio.
+     *
+     * @param diaInicio La nueva fecha de inicio.
+     */
     public void setDiaInicio(LocalDateTime diaInicio) {
         this.diaInicio = diaInicio;
     }
 
+    /**
+     * Devuelve la fecha actual.
+     *
+     * @return La fecha actual.
+     */
     public LocalDateTime getDiaActual() {
         return diaActual;
     }
 
+    /**
+     * Establece la fecha actual.
+     *
+     * @param diaActual La nueva fecha actual.
+     */
     public void setDiaActual(LocalDateTime diaActual) {
         this.diaActual = diaActual;
     }
 
+    /**
+     * Muestra los días sobrios.
+     * Calcula la diferencia entre la fecha de inicio y la fecha actual en días.
+     */
     public void mostrarDiasSobrio() {
         long diasSobrio = ChronoUnit.DAYS.between(diaInicio, diaActual);
         System.out.println("Días sobrios: " + diasSobrio);
     }
+
 
     
 }

@@ -236,6 +236,11 @@ public class Usuario {
     }
 
     /**
+     * 
+     * Constructo de la clase usuario
+     * 
+     * 
+     * 
      * @param nombre
      * @param correo
      * @param password

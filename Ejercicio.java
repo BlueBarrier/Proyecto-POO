@@ -36,42 +36,103 @@ public class Ejercicio {
     public int getID() {
         return ID;
     }
+    /**
+     * Establece el valor del ID.
+     *
+     * @param iD El nuevo valor del ID.
+     */
     public void setID(int iD) {
         this.ID = iD;
     }
 
+    /**
+     * Devuelve el valor del nombre.
+     *
+     * @return El valor del nombre.
+     */
     public String getNombre() {
         return Nombre;
     }
+
+    /**
+     * Establece el valor del nombre.
+     *
+     * @param nombre El nuevo valor del nombre.
+     */
     public void setNombre(String nombre) {
         this.Nombre = nombre;
     }
 
+    /**
+     * Devuelve la descripción.
+     *
+     * @return La descripción.
+     */
     public String getDescripcion() {
         return Descripcion;
     }
+
+    /**
+     * Establece la descripción.
+     *
+     * @param descripcion La nueva descripción.
+     */
     public void setDescripcion(String descripcion) {
         this.Descripcion = descripcion;
     }
 
+    /**
+     * Devuelve los pasos.
+     *
+     * @return Los pasos.
+     */
     public String getPasos() {
         return Pasos;
     }
+
+    /**
+     * Establece los pasos.
+     *
+     * @param pasos Los nuevos pasos.
+     */
     public void setPasos(String pasos) {
         this.Pasos = pasos;
     }
 
+    /**
+     * Devuelve la duración.
+     *
+     * @return La duración.
+     */
     public int getDuracion() {
         return Duracion;
     }
+
+    /**
+     * Establece la duración.
+     *
+     * @param duracion La nueva duración.
+     */
     public void setDuracion(int duracion) {
         this.Duracion = duracion;
     }
 
+    /**
+     * Devuelve las repeticiones.
+     *
+     * @return Las repeticiones.
+     */
     public int getRepeticiones() {
         return Repeticiones;
     }
+
+    /**
+     * Establece las repeticiones.
+     *
+     * @param repeticiones Las nuevas repeticiones.
+     */
     public void setRepeticiones(int repeticiones) {
         this.Repeticiones = repeticiones;
     }
+
 }
